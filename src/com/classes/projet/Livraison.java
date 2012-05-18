@@ -1,6 +1,6 @@
 package com.classes.projet;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Livraison {
 	/*Constructeur */
@@ -25,7 +25,7 @@ public class Livraison {
 	private Destinataire destinataire;
 	private int status,motif_refus;
 	private String commentaire,id;
-	private List<Colis> listeColis;
+	private ArrayList<Colis> listeColis;
 	
 	/*Getter & Setter*/
 	public String getId() {
@@ -86,10 +86,10 @@ public class Livraison {
 		commentaire=le_commentaire;
 	}
 	
-	public List<Colis> getListeColis() {
+	public ArrayList<Colis> getListeColis() {
 		return listeColis;
 	}
-	public void setListePaquet(List<Colis> paquet) {
+	public void setListePaquet(ArrayList<Colis> paquet) {
 		this.listeColis = paquet;
 	}
 	public void setPaquet(Colis paquet)
