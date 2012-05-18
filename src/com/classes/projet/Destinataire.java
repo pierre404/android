@@ -13,6 +13,9 @@ public class Destinataire {
 		this.telephone = telephone;
 		this.portable = portable;
 	}
+	public Destinataire() {
+		
+	}
 	private String nom;
 	private String rue;
 	private String cp;
@@ -20,6 +23,7 @@ public class Destinataire {
 	private String complement_adresse;
 	private String telephone;
 	private String portable;
+	private int latitude,longitude;
 	
 	public String getCp() {
 		return cp;
@@ -70,5 +74,23 @@ public class Destinataire {
 		this.portable = portable;
 	}
 	
+	public int getLatitude()
+	{
+		return latitude;
+	}
+	
+	public void setLatitude(int la_latitude)
+	{
+		this.latitude=la_latitude;
+	}
+	public int getLongitude()
+	{
+		return longitude;
+	}
+	
+	public void setLongitude(int la_longitude)
+	{
+		this.longitude=la_longitude;
+	}
 	
 }
