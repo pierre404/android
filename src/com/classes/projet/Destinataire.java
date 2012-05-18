@@ -2,6 +2,7 @@ package com.classes.projet;
 
 public class Destinataire {
 	
+	/*Constructeur*/
 	public Destinataire(String nom, String rue, String cp, String ville,
 			String complement_adresse, String telephone, String portable) {
 		super();
@@ -16,6 +17,8 @@ public class Destinataire {
 	public Destinataire() {
 		
 	}
+	
+	/*Attribut*/
 	private String nom;
 	private String rue;
 	private String cp;
@@ -25,6 +28,8 @@ public class Destinataire {
 	private String portable;
 	private int latitude,longitude;
 	
+	
+	/*Getter & Setter*/
 	public String getCp() {
 		return cp;
 	}
@@ -83,6 +88,7 @@ public class Destinataire {
 	{
 		this.latitude=la_latitude;
 	}
+	
 	public int getLongitude()
 	{
 		return longitude;
