@@ -12,6 +12,7 @@ public class Livraison {
 		this.status=status;
 		this.motif_refus=motif_refus;
 		this.commentaire=commentaire;
+		this.listeColis = new ArrayList<Colis>();
 	}
 	
 	public Livraison() {

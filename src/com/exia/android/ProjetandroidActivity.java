@@ -3,22 +3,29 @@ package com.exia.android;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.classes.projet.Colis;
 import com.classes.projet.CoordGPS;
 import com.classes.projet.Destinataire;
+import com.classes.projet.Expediteur;
 import com.classes.projet.Livraison;
 import com.classes.projet.Tournee;
 import com.exia.algoant.AntExecution;
+
 
 public class ProjetandroidActivity extends Activity {
 	private Button leaveButton = null;
 	private Button scanButton = null;
 	private Button showListButton = null;
+	private Tournee t;
+	private ArrayList<Colis> colisscane = new ArrayList<Colis>();
+	private Livraison currentLivraison;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -31,30 +38,35 @@ public class ProjetandroidActivity extends Activity {
 				"0640191362", "0640191362");
 		d1.setCoordGPS(new CoordGPS(d1.getRue() + " " + d1.getCp() + " "
 				+ d1.getVille(), this));
-		Livraison l1 = new Livraison("505465654", null, d1, 0, 0, "");
+		Livraison l1 = new Livraison("505465654", new Expediteur("Exia.cesi", "1 rue G Marconi", "76130", "Mont Saint Aignan", "0235214256"), d1, 0, 0, "");
 		Destinataire d2 = new Destinataire("Beuvin Juliette",
 				"1, rue victor Boucher", "76270", "Neufchatel en Bray", "",
 				"0640191362", "0640191362");
 		d2.setCoordGPS(new CoordGPS(d2.getRue() + " " + d2.getCp() + " "
 				+ d2.getVille(), this));
-		Livraison l2 = new Livraison("505465654", null, d2, 0, 0, "");
+		Livraison l2 = new Livraison("505465654", new Expediteur("Exia.cesi", "1 rue G Marconi", "76130", "Mont Saint Aignan", "0235214256"), d2, 0, 0, "");
 		Destinataire d3 = new Destinataire("Ridel Nicolas",
 				"76 rue de l'église", "76190", "Auzebosc", "", "0640191362",
 				"0640191362");
 		d3.setCoordGPS(new CoordGPS(d3.getRue() + " " + d3.getCp() + " "
 				+ d3.getVille(), this));
-		Livraison l3 = new Livraison("505465654", null, d3, 0, 0, "");
+		Livraison l3 = new Livraison("505465654", new Expediteur("Exia.cesi", "1 rue G Marconi", "76130", "Mont Saint Aignan", "0235214256"), d3, 0, 0, "");
 		Destinataire d4 = new Destinataire("Pierre Ruggirello", "", "27200",
 				"Vernon", "", "0640191362", "0640191362");
 		d4.setCoordGPS(new CoordGPS(d4.getRue() + " " + d4.getCp() + " "
 				+ d4.getVille(), this));
-		Livraison l4 = new Livraison("505465654", null, d4, 0, 0, "");
+		Livraison l4 = new Livraison("505465654", new Expediteur("Exia.cesi", "1 rue G Marconi", "76130", "Mont Saint Aignan", "0235214256"), d4, 0, 0, "");
 		ArrayList<Livraison> list = new ArrayList<Livraison>();
+		l1.setColis(new Colis("3274080005003", "30*30*30", "400g"));
+		l1.setColis(new Colis("3103220009710", "30*30*30", "400g"));
+		l1.setNbr_colis(2);
 		list.add(l1);
 		list.add(l2);
 		list.add(l3);
 		list.add(l4);
-		Tournee t = Tournee.getInstance();
+		t = Tournee.getInstance();
+		
+		t.setListeLivraison(list);
 
 		AntExecution ae = new AntExecution(t.getListeLivraison());
 
@@ -68,7 +80,7 @@ public class ProjetandroidActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent("com.guigou.projet.android.SCAN");
+				Intent intent = new Intent("com.google.zxing.client.android.SCAN");
 				intent.putExtra("SCAN_MODE", "PRODUCT_MODE");
 				intent.putExtra("SCAN_WIDTH", 800);
 				intent.putExtra("SCAN_HEIGHT", 200);
@@ -102,6 +114,76 @@ public class ProjetandroidActivity extends Activity {
 		 * adb.setPositiveButton("Fermer", null); adb.show();
 		 */
 	}
+	
+	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		   if (requestCode == 0) {
+		      if (resultCode == RESULT_OK) {
+		         String contents = intent.getStringExtra("SCAN_RESULT");
+		         String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
+		         Colis colisscan = null;
+		         Livraison currentLivraison = null;
+		         for(int i = 0; i < t.getListeLivraison().size(); i++)
+		         {
+		        	 for(int j = 0; j < t.getListeLivraison().get(i).getListeColis().size(); j++)
+		        	 {
+		        		 if(t.getListeLivraison().get(i).getListeColis().get(j).getCode_barre().equals(contents))
+		        		 {
+		        			 colisscan = t.getListeLivraison().get(i).getListeColis().get(j);
+		        			 currentLivraison = t.getListeLivraison().get(i);
+		        		 }
+		        	 }
+		         }
+		         if(colisscan == null)
+		         {		        	 
+		        	 AlertDialog.Builder adb = new AlertDialog.Builder(this);
+		        	 adb.setTitle("Erreur de scan"); adb.setMessage("Ce code barre ne correspond à aucun colis répertorié !");
+		        	 adb.setPositiveButton("Fermer", null); adb.show();
+		     		 
+		         }
+		         else
+		         {
+		        	 if(this.currentLivraison == null)
+		        	 {
+		        		 this.currentLivraison = currentLivraison;
+		        	 }
+		        	 if(!currentLivraison.equals(this.currentLivraison))
+		        	 {
+		        		 AlertDialog.Builder adb = new AlertDialog.Builder(this);
+			        	 adb.setTitle("Erreur de scan"); adb.setMessage("Ce code barre n'appartient pas à la livraison en cours !");
+			        	 adb.setPositiveButton("Fermer", null); adb.show();
+		        	 }
+		        	 else
+		        	 {
+			        	 if(this.colisscane.contains(colisscan))
+			        	 {
+			        		 AlertDialog.Builder adb = new AlertDialog.Builder(this);
+				        	 adb.setTitle("Erreur de scan"); adb.setMessage("Vous avez déjà scanné ce colis !");
+				        	 adb.setPositiveButton("Fermer", null); adb.show();
+			        		 
+			        	 }
+			        	 else
+			        	 {
+			        		 this.colisscane.add(colisscan);
+			        		 if(currentLivraison.getNbr_colis() == this.colisscane.size())
+			        		 {
+			        			 
+			        		 }
+			        		 else
+			        		 {
+			        			 AlertDialog.Builder adb = new AlertDialog.Builder(this);
+			        			 int nbrecolis = currentLivraison.getNbr_colis() - this.colisscane.size();
+					        	 adb.setTitle("Scan validé"); adb.setMessage("Il reste " + nbrecolis + " colis à scanner !");
+					        	 adb.setPositiveButton("Fermer", null); adb.show();
+			        		 }
+			        	 }
+		        	 }
+		         }		         
+		         // Handle successful scan
+		      } else if (resultCode == RESULT_CANCELED) {
+		         // Handle cancel
+		      }
+		   }
+		}
 
 	@Override
 	protected void onResume() {
