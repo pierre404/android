@@ -9,8 +9,8 @@ public class AntExecution {
 	private ArrayList<Livraison> livraisons;
 	private int distances[][];
 
-	private int lat_repository = 504253641;
-	private int lon_repository = 452423214;
+	private int lat_repository = 49477029;
+	private int lon_repository = 1091308;
 
 	public AntExecution(ArrayList<Livraison> livraisons) {
 		this.livraisons = livraisons;
@@ -49,7 +49,7 @@ public class AntExecution {
 		sys.run(nbIterations);
 		ArrayList<Livraison> orderLivraisons = new ArrayList<Livraison>();
 		for (int i = 1; i < livraisons.size() + 1; i++) {
-			orderLivraisons.add(livraisons.get(sys.bestSolution.get(i)));
+			orderLivraisons.add(livraisons.get(sys.bestSolution.get(i) - 1));
 		}
 		return orderLivraisons;
 	}

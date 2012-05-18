@@ -4,17 +4,16 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
-
-import com.exia.android.ProjetandroidActivity;
 
 public class CoordGPS {
 	int latitude;
 	int longitude;
 
-	public CoordGPS(String address) {
-		Geocoder gc = new Geocoder(ProjetandroidActivity.getAppContext(),
+	public CoordGPS(String address, Context context) {
+		Geocoder gc = new Geocoder(context,
 				Locale.FRANCE);
 		List<Address> addresses;
 		try {
