@@ -4,12 +4,10 @@ import java.util.List;
 
 public class Livraison {
 	/*Constructeur */
-	public Livraison(String id, Expediteur expediteur, Colis colis,
-			Destinataire destinataire, int status, int motif_refus, String commentaire) {
+	public Livraison(String id, Expediteur expediteur,Destinataire destinataire, int status, int motif_refus, String commentaire) {
 		super();
 		this.id = id;
 		this.expediteur = expediteur;
-		this.colis = colis;
 		this.destinataire = destinataire;
 		this.status=status;
 		this.motif_refus=motif_refus;
@@ -21,9 +19,8 @@ public class Livraison {
 	
 	/*Attribut*/
 	private Expediteur expediteur;
-	private Colis colis;
 	private Destinataire destinataire;
-	private int status,motif_refus;
+	private int status,motif_refus,nbr_Colis;
 	private String commentaire,id;
 	private List<Colis> listeColis;
 	
@@ -40,13 +37,6 @@ public class Livraison {
 	}
 	public void setExpediteur(Expediteur expediteur) {
 		this.expediteur = expediteur;
-	}
-	
-	public Colis getColis() {
-		return colis;
-	}
-	public void setColis(Colis colis) {
-		this.colis = colis;
 	}
 	
 	public Destinataire getDestinataire() {
@@ -92,12 +82,20 @@ public class Livraison {
 	public void setListePaquet(List<Colis> paquet) {
 		this.listeColis = paquet;
 	}
-	public void setPaquet(Colis paquet)
+	public void setColis(Colis paquet)
 	{
 		this.listeColis.add(paquet);
 	}
-	public Colis getPaquet(int num)
+	public Colis getColis(int num)
 	{
 		return listeColis.get(num);
+	}
+	public void setNbr_colis(int nbr)
+	{
+		this.nbr_Colis=nbr;
+	}
+	public int getNbr_colis()
+	{
+		return nbr_Colis;
 	}
 }
