@@ -1,6 +1,7 @@
 package com.exia.android;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -53,5 +54,9 @@ public class ProjetandroidActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		Utils.checkGPS(this);
+	}
+
+	public static Context getAppContext() {
+		return ProjetandroidActivity.getAppContext();
 	}
 }
