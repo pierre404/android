@@ -27,10 +27,10 @@ public class ProjetandroidActivity extends Activity {
 
 		Destinataire d1 = new Destinataire("Mouquet Benoit", "9, rue du beau soleil", "76660", "Londinières", "", "0640191362", "0640191362");
 		d1.setCoordGPS(new CoordGPS(d1.getRue() + " " + d1.getCp() + " " + d1.getVille(), this));
-		Livraison l1 = new Livraison("505465654", null, null, d1, 0, 0, "");
+		Livraison l1 = new Livraison("505465654", null, d1, 0, 0, "");
 		Destinataire d2 = new Destinataire("Beuvin Juliette", "1, rue victor Boucher", "76270", "Neufchatel en Bray", "", "0640191362", "0640191362");
 		d2.setCoordGPS(new CoordGPS(d2.getRue() + " " + d2.getCp() + " " + d2.getVille(), this));
-		Livraison l2 = new Livraison("505465654", null, null, d2, 0, 0, "");
+		Livraison l2 = new Livraison("505465654", null, d2, 0, 0, "");
 		ArrayList<Livraison> list = new ArrayList<Livraison>();
 		list.add(l1);
 		list.add(l2);
