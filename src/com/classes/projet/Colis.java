@@ -4,25 +4,35 @@ import java.util.List;
 
 public class Colis {
 	
-	public Colis(int nombre, List<Paquet> paquet) {
+	public Colis(int nombre, List<Paquet> une_liste_de_paquet) {
 		super();
 		this.nombre = nombre;
-		this.paquet = paquet;
+		this.listePaquet = une_liste_de_paquet;
 	}
+	public Colis() {
+	}
+	
 	private int nombre;
-	private List<Paquet> paquet;
+	private List<Paquet> listePaquet;
+	
 	public int getNombre() {
 		return nombre;
 	}
 	public void setNombre(int nombre) {
 		this.nombre = nombre;
 	}
-	public List<Paquet> getPaquet() {
-		return paquet;
+	public List<Paquet> getListePaquet() {
+		return listePaquet;
 	}
-	public void setPaquet(List<Paquet> paquet) {
-		this.paquet = paquet;
+	public void setListePaquet(List<Paquet> paquet) {
+		this.listePaquet = paquet;
 	}
-	
-
+	public void setPaquet(Paquet paquet)
+	{
+		this.listePaquet.add(paquet);
+	}
+	public Paquet getPaquet(int num)
+	{
+		return listePaquet.get(num);
+	}
 }
