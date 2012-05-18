@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-
-    <string name="hello">Hello World, ProjetandroidActivity! Guuiig[]u=P EnculeFiPu</string>
-
-
-    <string name="app_name">Projetandroid</string>
+    <string name="hello">Hello World, ProjetAndroidActivity!</string>
+    <string name="app_name">ProjetAndroid</string>
+    <string name="scan_parcel">Scanner un colis</string>
+    <string name="show_list">Afficher la liste de livraison</string>
+    <string name="leave">Quitter</string>
+    <string name="validate">Valider</string>
+    <string name="accept_parcel">Accepter</string>
+    <string name="deny_parcel">Refuser</string>
+    <string name="absent">Absent</string>
+    <string name="comments">Commentaires : </string>
 
 </resources>
