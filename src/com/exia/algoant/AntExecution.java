@@ -15,13 +15,16 @@ public class AntExecution {
 	public ArrayList<Livraison> run() {
 		for (int i = 0; i < livraisons.size(); i++) {
 			for (int j = 0; j < livraisons.size(); j++) {
-				distances[i][j] = (int) Math.sqrt(Math.pow((livraisons.get(j)
-						.getDestinataire().getLatitude() - livraisons.get(i)
-						.getDestinataire().getLatitude()), 2)
-						+ Math.pow(livraisons.get(j).getDestinataire()
-								.getLongitude()
-								- livraisons.get(i).getDestinataire()
-										.getLongitude(), 2));
+				distances[i][j] = (int) Math
+						.sqrt(Math.pow((livraisons.get(j).getDestinataire()
+								.getCoordGPS().getLatitude() - livraisons
+								.get(i).getDestinataire().getCoordGPS()
+								.getLatitude()), 2)
+								+ Math.pow(livraisons.get(j).getDestinataire()
+										.getCoordGPS().getLongitude()
+										- livraisons.get(i).getDestinataire()
+												.getCoordGPS().getLongitude(),
+										2));
 			}
 		}
 

@@ -38,11 +38,11 @@ public class CoordGPS {
 		this.latitude = latitude;
 	}
 
-	public int getLogitude() {
+	public int getLongitude() {
 		return longitude;
 	}
 
-	public void setLogitude(int longitude) {
+	public void setLongitude(int longitude) {
 		this.longitude = longitude;
 	}
 }
