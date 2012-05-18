@@ -1,13 +1,13 @@
 package com.classes.projet;
 
-import java.util.List;
+import java.util.ArrayList;
 
 
 public class Tournee implements java.io.Serializable {
 	
 	/*Constructeur*/
 	public Tournee(Livreur livreur, String date_tournee,
-			List<Livraison> liste_livraison) {
+			ArrayList<Livraison> liste_livraison) {
 		super();
 		this.livreur = livreur;
 		this.date_tournee = date_tournee;
@@ -22,7 +22,7 @@ public class Tournee implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private Livreur livreur;
 	private String date_tournee;
-	private List<Livraison> listeLivraison;
+	private ArrayList<Livraison> listeLivraison;
 	private int nombre_livraison;
 	
 
@@ -52,11 +52,11 @@ public class Tournee implements java.io.Serializable {
 		this.date_tournee = date_tournee;
 	}
 
-	public List<Livraison> getListeLivraison() {
+	public ArrayList<Livraison> getListeLivraison() {
 		return listeLivraison;
 	}
 
-	public void setListeLivraison(List<Livraison> livraison) {
+	public void setListeLivraison(ArrayList<Livraison> livraison) {
 		this.listeLivraison = livraison;
 	}
 	
