@@ -20,7 +20,7 @@ public class Livraison {
 	/*Attribut*/
 	private Expediteur expediteur;
 	private Destinataire destinataire;
-	private int status,motif_refus,nbr_Colis;
+	private int status,motif_refus,nombre_Colis;
 	private String commentaire,id;
 	private ArrayList<Colis> listeColis;
 	
@@ -92,10 +92,10 @@ public class Livraison {
 	}
 	public void setNbr_colis(int nbr)
 	{
-		this.nbr_Colis=nbr;
+		this.nombre_Colis=nbr;
 	}
 	public int getNbr_colis()
 	{
-		return nbr_Colis;
+		return nombre_Colis;
 	}
 }

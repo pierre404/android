@@ -14,8 +14,7 @@ public class Tournee implements java.io.Serializable {
 		this.listeLivraison = liste_livraison;
 	}
 	
-	public Tournee() {
-		
+	public Tournee() {		
 	}
 
 	/*Attribut*/

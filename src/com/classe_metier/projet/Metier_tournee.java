@@ -2,14 +2,23 @@ package com.classe_metier.projet;
 
 
 import com.classes.projet.Colis;
+import com.classes.projet.Destinataire;
+import com.classes.projet.Expediteur;
 import com.classes.projet.Livraison;
 import com.classes.projet.Livreur;
 import com.classes.projet.Tournee;
 
 public class Metier_tournee 
 {	
-	Tournee la_tournee = new Tournee();
+	/*Constructeur*/
+	
+	public Metier_tournee() {		
+		
+	}
+	
+	
 	GestionXML xml = new GestionXML();
+	Tournee la_tournee = new Tournee();
 	
 	public void ajout_livreur()
 	{
@@ -24,30 +33,81 @@ public class Metier_tournee
 		la_tournee.setNbr(xml.nbr_livraison("/sdcard/tournee.xml"));
 	}
 
-	public void ajout_livraison()
+	public void mai_ajout_livraison()
 	{
+		
+		
 		int nbr_livraison=0;
+		ajout_nbr_livraison();
+		ajout_livreur();
+		ajout_date_tournee();
+		
 		while(la_tournee.getNbr()>nbr_livraison)
 		{
-			nbr_livraison++;
-			Livraison une_livraison=new Livraison();
-			une_livraison.setNbr_colis(xml.recup_id("/sdcard/tournee.xml","//livraison["+nbr_livraison+"]/nombre/"));
 			int nbr_colis=0;
+			Livraison une_livraison=new Livraison();
+			
+			nbr_livraison++;			
+			ajout_livraison(nbr_livraison,une_livraison);
+			
 			while(une_livraison.getNbr_colis()>nbr_colis)
 			{
 				nbr_colis++;
-				Colis un_colis = new Colis();
-				un_colis.setCode_barre(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+nbr_livraison+"]/colis/paquet["+nbr_colis+"]/code_barre/"));
-				un_colis.setTaille(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+nbr_livraison+"]/colis/paquet["+nbr_colis+"]/taille/"));
-				un_colis.setPoids(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+nbr_livraison+"]/colis/paquet["+nbr_colis+"]/poids/"));
-				une_livraison.setColis(un_colis);
+				ajout_colis(une_livraison, nbr_livraison, nbr_colis);				
 			}
+			
+			ajout_expediteur(une_livraison,nbr_livraison);
+			ajout_destinataire(une_livraison,nbr_livraison);
 			
 		}
 	}
 	
+	public void ajout_livraison(int nbr_livraison, Livraison la_livraison)
+	{
+		
+		la_livraison.setNbr_colis(xml.recup_id("/sdcard/tournee.xml","//livraison["+nbr_livraison+"]/nombre/"));
+	}
+	
 	public void ajout_date_tournee()
 	{
-		la_tournee.setDate_tournee(xml.recup_donnee("/sdcard/tournee.xml", "//date"));
+		la_tournee.setDate_tournee(xml.recup_donnee("/sdcard/tournee.xml", "//date_tournee"));
 	}
+	
+	public void ajout_expediteur(Livraison la_livraison,int num_livraison)
+	{
+		Expediteur un_expediteur = new Expediteur();
+		
+		un_expediteur.setNom(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/expediteur/nom/"));
+		un_expediteur.setRue(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/expediteur/rue/"));
+		un_expediteur.setCp(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/expediteur/cp/"));
+		un_expediteur.setVille(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/expediteur/ville/"));
+		un_expediteur.setTelephone(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/expediteur/telephone/"));
+		
+		la_livraison.setExpediteur(un_expediteur);
+	}
+	
+	public void ajout_destinataire(Livraison la_livraison,int num_livraison)
+	{
+		Destinataire un_destinataire= new Destinataire();
+		
+		un_destinataire.setNom(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/expediteur/nom/"));
+		un_destinataire.setRue(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/expediteur/rue/"));
+		un_destinataire.setCp(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/expediteur/cp/"));
+		un_destinataire.setVille(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/expediteur/ville/"));
+		un_destinataire.setComplement_adresse(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/expediteur/complement_adresse/"));
+		un_destinataire.setTelephone(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/expediteur/telephone/"));
+		un_destinataire.setPortable(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/expediteur/portable/"));
+	
+		la_livraison.setDestinataire(un_destinataire);
+	}
+	
+	public void ajout_colis(Livraison la_livraison, int nbr_livraison, int nbr_colis)
+	{
+		Colis un_colis = new Colis();
+		un_colis.setCode_barre(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+nbr_livraison+"]/colis/paquet["+nbr_colis+"]/code_barre/"));
+		un_colis.setTaille(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+nbr_livraison+"]/colis/paquet["+nbr_colis+"]/taille/"));
+		un_colis.setPoids(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+nbr_livraison+"]/colis/paquet["+nbr_colis+"]/poids/"));
+		la_livraison.setColis(un_colis);
+	}
+	
 }
