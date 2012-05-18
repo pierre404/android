@@ -1,6 +1,8 @@
 package com.classes.projet;
 
 public class Expediteur {
+	
+	/*Constructeur*/
 	public Expediteur(String nom, String rue, String cp, String ville,
 			String telephone) {
 		super();
@@ -10,12 +12,19 @@ public class Expediteur {
 		this.ville = ville;
 		this.telephone = telephone;
 	}
+	
+	public Expediteur() {
+		
+	}
+	
+	/*Attribut*/
 	private String nom;
 	private String rue;
 	private String cp;
 	private String ville;
 	private String telephone;
 	
+	/*Getter & Setter*/
 	public String getNom() {
 		return nom;
 	}
@@ -50,6 +59,4 @@ public class Expediteur {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
-	
-	
 }
