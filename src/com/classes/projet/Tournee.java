@@ -5,29 +5,28 @@ import java.util.List;
 
 public class Tournee implements java.io.Serializable {
 	
+	/*Constructeur*/
 	public Tournee(Livreur livreur, String date_tournee,
-			List<Livraison> livraison) {
+			List<Livraison> liste_livraison) {
 		super();
 		this.livreur = livreur;
 		this.date_tournee = date_tournee;
-		this.livraison = livraison;
+		this.listeLivraison = liste_livraison;
 	}
 	
 	public Tournee() {
 		
 	}
 
-	/**
-	 * 
-	 */
+	/*Attribut*/
 	private static final long serialVersionUID = 1L;
 	private Livreur livreur;
 	private String date_tournee;
-	private List<Livraison> livraison;
+	private List<Livraison> listeLivraison;
 	private int nombre_livraison;
 	
 
-	
+	/*Getter & Setter*/
 	public Livreur getlivreur() {
 		return livreur;
 	}
@@ -53,11 +52,20 @@ public class Tournee implements java.io.Serializable {
 		this.date_tournee = date_tournee;
 	}
 
-	public List<Livraison> getLivraison() {
-		return livraison;
+	public List<Livraison> getListeLivraison() {
+		return listeLivraison;
 	}
 
-	public void setLivraison(List<Livraison> livraison) {
-		this.livraison = livraison;
-	} 
+	public void setListeLivraison(List<Livraison> livraison) {
+		this.listeLivraison = livraison;
+	}
+	
+	public Livraison getLivraison(int num)
+	{
+		return listeLivraison.get(num);
+	}
+	public void setLivraison(Livraison une_livraison)
+	{
+		this.listeLivraison.add(une_livraison);
+	}
 }

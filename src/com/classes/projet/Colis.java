@@ -1,38 +1,38 @@
 package com.classes.projet;
 
-import java.util.List;
 
 public class Colis {
 	
-	public Colis(int nombre, List<Paquet> une_liste_de_paquet) {
+	/*Constructeur*/
+	public Colis(String id,String la_taille,String le_poids) {
 		super();
-		this.nombre = nombre;
-		this.listePaquet = une_liste_de_paquet;
+		this.code_barre = id;
+		this.taille=la_taille;
+		this.poids=le_poids;
 	}
 	public Colis() {
 	}
 	
-	private int nombre;
-	private List<Paquet> listePaquet;
+	/*Attribut*/
+	private String code_barre,taille,poids;
 	
-	public int getNombre() {
-		return nombre;
+	/*Getter & Setter*/
+	public String getCode_barre() {
+		return code_barre;
 	}
-	public void setNombre(int nombre) {
-		this.nombre = nombre;
+	public void setCode_barre(String code_barre) {
+		this.code_barre = code_barre;
 	}
-	public List<Paquet> getListePaquet() {
-		return listePaquet;
+	public String getTaille() {
+		return taille;
 	}
-	public void setListePaquet(List<Paquet> paquet) {
-		this.listePaquet = paquet;
+	public void setTaille(String taille) {
+		this.taille = taille;
 	}
-	public void setPaquet(Paquet paquet)
-	{
-		this.listePaquet.add(paquet);
+	public String getPoids() {
+		return poids;
 	}
-	public Paquet getPaquet(int num)
-	{
-		return listePaquet.get(num);
-	}
+	public void setPoids(String poids) {
+		this.poids = poids;
+	}	
 }
