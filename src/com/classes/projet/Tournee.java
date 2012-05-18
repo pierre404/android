@@ -35,11 +35,11 @@ public class Tournee implements java.io.Serializable {
 		this.livreur = lelivreur;
 	}
 	
-	public int getnbr() {
+	public int getNbr() {
 		return nombre_livraison;
 	}
 	
-	public void setnbr(int nombre) {
+	public void setNbr(int nombre) {
 		this.nombre_livraison = nombre;
 	}
 
