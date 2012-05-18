@@ -68,7 +68,7 @@ public class Problem {
 			distances[i][(i + 1) % nbCities] = distances[(i + 1) % nbCities][i] = 1;*/
 
 		optimalLength = nbCities;
-		System.out.println(optimalLength);
+		//System.out.println(optimalLength);
 	}
 
 	public void setPheromones(int i, int j, long wayLength) {

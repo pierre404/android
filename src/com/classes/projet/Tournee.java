@@ -5,14 +5,23 @@ import java.util.ArrayList;
 
 public class Tournee implements java.io.Serializable {
 	
+	private static volatile Tournee instance = null;
+	
 	/*Constructeur*/
-	public Tournee(Livreur livreur, String date_tournee,
-			ArrayList<Livraison> liste_livraison) {
-		super();
-		this.livreur = livreur;
-		this.date_tournee = date_tournee;
-		this.listeLivraison = liste_livraison;
-	}
+	 public final static Tournee getInstance() {
+         //Le "Double-Checked Singleton"/"Singleton doublement vérifié" permet d'éviter un appel coûteux à synchronized, 
+         //une fois que l'instanciation est faite.
+         if (Tournee.instance == null) {
+            // Le mot-clé synchronized sur ce bloc empêche toute instanciation multiple même par différents "threads".
+            // Il est TRES important.
+            synchronized(Tournee.class) {
+              if (Tournee.instance == null) {
+            	  Tournee.instance = new Tournee();
+              }
+            }
+         }
+         return Tournee.instance;
+     }
 	
 	public Tournee() {		
 	}

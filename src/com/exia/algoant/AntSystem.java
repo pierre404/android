@@ -50,8 +50,8 @@ public class AntSystem {
 			if (curIteration % 20 == 0)
 				data.evaporate();  
 
-			if (curIteration%50==0)
-				System.out.println("Test : " + bestLength);
+			//if (curIteration%50==0)
+				//System.out.println("Test : " + bestLength);
 	    }
 	}
 	

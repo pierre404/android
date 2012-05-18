@@ -9,8 +9,8 @@ import android.location.Address;
 import android.location.Geocoder;
 
 public class CoordGPS {
-	int latitude;
-	int longitude;
+	double latitude;
+	double longitude;
 
 	public CoordGPS(String address, Context context) {
 		Geocoder gc = new Geocoder(context,
@@ -19,8 +19,8 @@ public class CoordGPS {
 		try {
 			addresses = gc.getFromLocationName(address, 5);
 			if (addresses.size() > 0) {
-				this.latitude = (int) (addresses.get(0).getLatitude() * 1000000);
-				this.longitude = (int) (addresses.get(0).getLongitude() * 1000000);
+				this.latitude = addresses.get(0).getLatitude();
+				this.longitude = addresses.get(0).getLongitude();
 			}
 
 		} catch (IOException e) {
@@ -28,20 +28,26 @@ public class CoordGPS {
 			e.printStackTrace();
 		}
 	}
+	
+	public CoordGPS(Double latitude, Double longitude)
+	{
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
 
-	public int getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(int latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 
-	public int getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(int longitude) {
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
 }
