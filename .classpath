@@ -4,6 +4,6 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="lib" path="C:/Users/Benoit/Desktop/CoreBC/core.jar"/>
+	<classpathentry kind="lib" path="D:/Android/Eclipse/Jar/core.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
