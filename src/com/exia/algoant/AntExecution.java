@@ -8,7 +8,7 @@ public class AntExecution {
 
 	private ArrayList<Livraison> livraisons;
 	private int distances[][];
-	
+
 	private int lat_repository = 504253641;
 	private int lon_repository = 452423214;
 
@@ -34,8 +34,9 @@ public class AntExecution {
 		}
 
 		for (int i = 0; i < livraisons.size(); i++) {
-			distances[0][i] = distances[i][0] = (int) Math.sqrt(Math.pow((livraisons.get(i)
-					.getDestinataire().getCoordGPS().getLatitude() - lat_repository), 2)
+			distances[0][i] = distances[i][0] = (int) Math.sqrt(Math.pow(
+					(livraisons.get(i).getDestinataire().getCoordGPS()
+							.getLatitude() - lat_repository), 2)
 					+ Math.pow(livraisons.get(i).getDestinataire()
 							.getCoordGPS().getLongitude()
 							- lon_repository, 2));
