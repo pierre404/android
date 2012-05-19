@@ -3,8 +3,6 @@ package com.classes.projet;
 import java.util.ArrayList;
 import java.util.Date;
 
-import android.text.format.Time;
-
 public class Livraison {
 	/*Constructeur */
 	public Livraison(String id, Expediteur expediteur,Destinataire destinataire, int status, int motif_refus, String commentaire) {
@@ -28,7 +26,7 @@ public class Livraison {
 	private String commentaire,id;
 	private ArrayList<Colis> listeColis;
 	private Date date_livraison;
-	private Time heure_livraison;
+	private CoordGPS coordGPS;
 	
 	/*Getter & Setter*/
 	public String getId() {
@@ -44,11 +42,13 @@ public class Livraison {
 	public void setDate(Date une_date) {
 		this.date_livraison = une_date;
 	}
-	public Time getHeure() {
-		return heure_livraison;
+	
+	public CoordGPS getCoordGPS() {
+		return coordGPS;
 	}
-	public void setHeure(Time une_heure) {
-		this.heure_livraison = une_heure;
+
+	public void setCoordGPS(CoordGPS coordGPS) {
+		this.coordGPS = coordGPS;
 	}
 	
 	public Expediteur getExpediteur() {
