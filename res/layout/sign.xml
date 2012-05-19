@@ -4,17 +4,21 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <SurfaceView
-        android:id="@+id/surfaceView1"
+    <com.exia.android.Signature
+        android:id="@+id/signature"
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_marginBottom="5dp"
         android:layout_weight="3" android:background="#FFFFFF"/>
-
-    
+
+    <Button
+        android:id="@+id/erase_sign"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/erase" />
 
      <Button
-         android:id="@+id/button1"
+         android:id="@+id/validate_sign"
          android:layout_height="wrap_content"
          android:layout_width="match_parent"
          android:layout_marginBottom="5dp"

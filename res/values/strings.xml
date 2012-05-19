@@ -11,5 +11,6 @@
     <string name="deny_parcel">Refuser</string>
     <string name="absent">Absent</string>
     <string name="comments">Commentaires : </string>
+    <string name="erase">Effacer</string>
 
 </resources>

@@ -76,5 +76,11 @@ public class ShowLivraison extends Activity {
 		}
 		return i;
 	}
-
+	
+	@Override
+	public void onBackPressed()         
+	{
+		super.onBackPressed();
+		finish();          
+    }
 }
