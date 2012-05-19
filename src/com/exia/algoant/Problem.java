@@ -5,6 +5,8 @@ public class Problem {
 	int nbCities;
 	float borneMax, borneMin;
 	float evaporation;
+	
+	boolean needreturn = true;
 
 	int optimalLength;
 

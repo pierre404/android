@@ -19,8 +19,8 @@
         android:background="@drawable/btn_scan"
         android:layout_width="210dp" 
         android:layout_height="155dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginLeft="55dp"
+        android:layout_marginTop="75dp"
+        android:layout_gravity="center"
         />
         
 
@@ -30,7 +30,7 @@
         android:layout_width="200dp" 
         android:layout_height="155dp"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="55dp" />
+        android:layout_gravity="center" />
 
 
 

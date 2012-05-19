@@ -68,7 +68,7 @@ public class ProjetandroidActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(ProjetandroidActivity.this,
-						ShowLivraison.class);
+						MapsActivity.class);
 				startActivity(i);
 			}
 		});
@@ -232,19 +232,25 @@ public class ProjetandroidActivity extends Activity {
 				Livraison l4 = new Livraison("505465654", new Expediteur(
 						"Exia.cesi", "1 rue G Marconi", "76130",
 						"Mont Saint Aignan", "0235214256"), d4, 0, 0, "");
+				Expediteur e1 = new Expediteur("Guillaume Verna", "",
+						"76200", "Dieppe", "0640168542");
+				e1.setCoordGPS(new CoordGPS(e1.getRue() + " " + e1.getCp()
+						+ " " + e1.getVille(), ProjetandroidActivity.this));
+				Livraison l5 = new Livraison("505465654", e1, null, 0, 0, "");
 				ArrayList<Livraison> list = new ArrayList<Livraison>();
-				l1.setColis(new Colis("3274080005003", "30*30*30", "400g"));
+				l1.setColis(new Colis("3595800105064", "30*30*30", "400g"));
 				// l1.setColis(new Colis("3103220009710", "30*30*30", "400g"));
 				l1.setNbr_colis(1);
 				list.add(l1);
 				list.add(l2);
 				list.add(l3);
 				list.add(l4);
+				list.add(l5);
 				t = Tournee.getInstance();
 
 				t.setListeLivraison(list);
 
-				AntExecution ae = new AntExecution(t.getListeLivraison());
+				AntExecution ae = new AntExecution(t.getListeLivraison(), true);
 
 				t.setListeLivraison(ae.run());
 				handler.sendEmptyMessage(0);

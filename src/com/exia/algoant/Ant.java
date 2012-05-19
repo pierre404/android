@@ -101,7 +101,8 @@ public class Ant {
 	            if (citiesStillToVisit.size() == 0){
 	                // plus rien à visiter, le chemin est complet
 	                // on revient vers le nid
-					tmpVisitedLength += data.distances[currentDestination][0];
+	            	if(data.needreturn)
+	            		tmpVisitedLength += data.distances[currentDestination][0];
 
 					status = RETURNING;
 	                currentOrigin =  visitedCities.size()-1;

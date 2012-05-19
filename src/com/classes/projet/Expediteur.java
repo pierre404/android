@@ -23,6 +23,8 @@ public class Expediteur {
 	private String cp;
 	private String ville;
 	private String telephone;
+
+	private CoordGPS coordGPS;
 	
 	/*Getter & Setter*/
 	public String getNom() {
@@ -30,6 +32,14 @@ public class Expediteur {
 	}
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+	
+	public CoordGPS getCoordGPS() {
+		return coordGPS;
+	}
+
+	public void setCoordGPS(CoordGPS coordGPS) {
+		this.coordGPS = coordGPS;
 	}
 	
 	public String getRue() {

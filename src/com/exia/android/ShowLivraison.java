@@ -1,12 +1,9 @@
 package com.exia.android;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -30,18 +27,19 @@ public class ShowLivraison extends Activity {
 		
 		Tournee t = Tournee.getInstance();
 		
-		Log.i("merde", t.getListeLivraison().size() + " ");
+		currentLivraison = t.getListeLivraison().get(this.getIntent().getExtras().getInt("indexDelivery"));
 		
-		currentLivraison = t.getListeLivraison().get(getCurrentLivraison(t.getListeLivraison()));
-		
-		detailsDest = (TextView) findViewById(R.id.details_dest);		
-		detailsDest.setText("Nom Prénom : " + currentLivraison.getDestinataire().getNom() + "\n"
-				+ "Adresse : "  + currentLivraison.getDestinataire().getRue() + "\n"
-				+ "Complément Adresse : "  + currentLivraison.getDestinataire().getComplement_adresse() + "\n"
-				+ "Code Postal : "  + currentLivraison.getDestinataire().getCp() + "\n"
-				+ "Ville : "  + currentLivraison.getDestinataire().getVille() + "\n"
-				+ "Téléphone : "  + currentLivraison.getDestinataire().getTelephone() + "\n"
-				+ "Portable : "  + currentLivraison.getDestinataire().getPortable() + "\n");
+		if(currentLivraison.getDestinataire() != null)
+		{
+			detailsDest = (TextView) findViewById(R.id.details_dest);		
+			detailsDest.setText("Nom Prénom : " + currentLivraison.getDestinataire().getNom() + "\n"
+					+ "Adresse : "  + currentLivraison.getDestinataire().getRue() + "\n"
+					+ "Complément Adresse : "  + currentLivraison.getDestinataire().getComplement_adresse() + "\n"
+					+ "Code Postal : "  + currentLivraison.getDestinataire().getCp() + "\n"
+					+ "Ville : "  + currentLivraison.getDestinataire().getVille() + "\n"
+					+ "Téléphone : "  + currentLivraison.getDestinataire().getTelephone() + "\n"
+					+ "Portable : "  + currentLivraison.getDestinataire().getPortable() + "\n");
+		}
 		
 		detailsExp = (TextView) findViewById(R.id.details_exp);
 		detailsExp.setText("Nom Prénom : " + currentLivraison.getExpediteur().getNom() + "\n"
@@ -64,7 +62,7 @@ public class ShowLivraison extends Activity {
 		
 	}
 	
-	public int getCurrentLivraison(ArrayList<Livraison> livraisons)
+	/*public int getCurrentLivraison(ArrayList<Livraison> livraisons)
 	{
 		int i = livraisons.size() - 1;
 		if(i > -1)
@@ -75,7 +73,7 @@ public class ShowLivraison extends Activity {
 			}
 		}
 		return i;
-	}
+	}*/
 	
 	@Override
 	public void onBackPressed()         
