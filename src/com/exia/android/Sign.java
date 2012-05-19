@@ -2,6 +2,7 @@ package com.exia.android;
 
 import java.util.Date;
 
+import com.classes.projet.CoordGPS;
 import com.classes.projet.Tournee;
 
 import android.app.Activity;
@@ -41,7 +42,8 @@ public class Sign extends Activity {
 			public void onClick(View v) {
 				s.saveBitmap(Sign.this);				
 				Tournee.getInstance().getListeLivraison().get(indexDelivery).setDate(new Date());
-				Utils.getLocationGPS(Sign.this);
+				double[] d = Utils.getLocationGPS(Sign.this);
+				Tournee.getInstance().getListeLivraison().get(indexDelivery).setCoordGPS(new CoordGPS(d[0], d[1]));
 				setResult(1);
 				Sign.this.finish();
 			}
