@@ -11,25 +11,37 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int background=0x7f020000;
+        public static final int btn_list=0x7f020001;
+        public static final int btn_quit=0x7f020002;
+        public static final int btn_scan=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
     }
     public static final class id {
         public static final int absent=0x7f050005;
         public static final int accept_parcel=0x7f050003;
-        public static final int button1=0x7f05000a;
+        public static final int comments=0x7f050002;
         public static final int deny_parcel=0x7f050004;
-        public static final int editText1=0x7f050002;
-        public static final int leave=0x7f050008;
-        public static final int scan_parcel=0x7f050006;
-        public static final int show_list=0x7f050007;
-        public static final int surfaceView1=0x7f050009;
-        public static final int textView1=0x7f050000;
+        public static final int details_dest=0x7f05000b;
+        public static final int details_exp=0x7f050000;
+        public static final int erase_sign=0x7f050010;
+        public static final int launch_navigation=0x7f05000e;
+        public static final int leave=0x7f050006;
+        public static final int nbr_colis=0x7f05000d;
+        public static final int scan_parcel=0x7f050007;
+        public static final int show_list=0x7f050008;
+        public static final int signature=0x7f05000f;
+        public static final int textView1=0x7f050009;
         public static final int textView2=0x7f050001;
+        public static final int textView3=0x7f05000a;
+        public static final int textView4=0x7f05000c;
+        public static final int validate_sign=0x7f050011;
     }
     public static final class layout {
         public static final int details_delivery=0x7f030000;
         public static final int main=0x7f030001;
-        public static final int sign=0x7f030002;
+        public static final int show_livraison=0x7f030002;
+        public static final int sign=0x7f030003;
     }
     public static final class string {
         public static final int absent=0x7f040008;
@@ -37,6 +49,7 @@ public final class R {
         public static final int app_name=0x7f040001;
         public static final int comments=0x7f040009;
         public static final int deny_parcel=0x7f040007;
+        public static final int erase=0x7f04000a;
         public static final int hello=0x7f040000;
         public static final int leave=0x7f040004;
         public static final int scan_parcel=0x7f040002;

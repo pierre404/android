@@ -19,7 +19,7 @@ public class ShowLivraison extends Activity {
 	
 	private TextView detailsDest;
 	private TextView detailsExp;
-	private TextView nbrColis;
+	//private TextView nbrColis;
 	private Button navigation;
 	private Livraison currentLivraison = null;
 
