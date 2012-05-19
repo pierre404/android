@@ -12,7 +12,6 @@ import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.classes.projet.Colis;
 import com.classes.projet.CoordGPS;
@@ -22,6 +21,12 @@ import com.classes.projet.Livraison;
 import com.classes.projet.Tournee;
 import com.exia.algoant.AntExecution;
 
+/**
+ * Activité principale de l'application
+ * 
+ * @author Benoit
+ * 
+ */
 public class ProjetandroidActivity extends Activity {
 	private Button leaveButton = null;
 	private Button scanButton = null;
@@ -32,7 +37,9 @@ public class ProjetandroidActivity extends Activity {
 	private ProgressDialog chargement;
 	private Handler handler;
 
-	/** Called when the activity is first created. */
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -73,7 +80,7 @@ public class ProjetandroidActivity extends Activity {
 				ProjetandroidActivity.this.finish();
 			}
 		});
-		
+
 		chargementDonnees();
 
 		/*
@@ -84,11 +91,14 @@ public class ProjetandroidActivity extends Activity {
 		 */
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
+	 */
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		if (requestCode == 0) {
 			if (resultCode == RESULT_OK) {
 				String contents = intent.getStringExtra("SCAN_RESULT");
-				String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
+				// String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
 				int indexCurrentLivraison = -1;
 				Colis colisscan = null;
 				Livraison currentLivraison = null;
@@ -134,11 +144,13 @@ public class ProjetandroidActivity extends Activity {
 							this.colisscane.add(colisscan);
 							if (currentLivraison.getNbr_colis() == this.colisscane
 									.size()) {
+								this.currentLivraison = null;
 								Intent i = new Intent(this,
 										DetailsDelivery.class);
 								i.putExtra("indexDelivery",
 										indexCurrentLivraison);
 								startActivity(i);
+
 							} else {
 								AlertDialog.Builder adb = new AlertDialog.Builder(
 										this);
@@ -160,12 +172,19 @@ public class ProjetandroidActivity extends Activity {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onResume()
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();
 		Utils.checkGPS(this);
 	}
 
+	/**
+	 * Charge les données issu du fichier XML
+	 * 
+	 */
 	private void chargementDonnees() {
 		chargement = new ProgressDialog(this);
 		chargement.setMessage("Chargement ...");
