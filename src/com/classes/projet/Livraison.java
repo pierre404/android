@@ -1,6 +1,9 @@
 package com.classes.projet;
 
 import java.util.ArrayList;
+import java.util.Date;
+
+import android.text.format.Time;
 
 public class Livraison {
 	/*Constructeur */
@@ -24,6 +27,8 @@ public class Livraison {
 	private int status,motif_refus,nombre_Colis;
 	private String commentaire,id;
 	private ArrayList<Colis> listeColis;
+	private Date date_livraison;
+	private Time heure_livraison;
 	
 	/*Getter & Setter*/
 	public String getId() {
@@ -31,6 +36,19 @@ public class Livraison {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public Date getDate() {
+		return date_livraison;
+	}
+	public void setDate(Date une_date) {
+		this.date_livraison = une_date;
+	}
+	public Time getHeure() {
+		return heure_livraison;
+	}
+	public void setHeure(Time une_heure) {
+		this.heure_livraison = une_heure;
 	}
 	
 	public Expediteur getExpediteur() {
