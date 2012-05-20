@@ -12,5 +12,15 @@
     <string name="absent">Absent</string>
     <string name="comments">Commentaires : </string>
     <string name="erase">Effacer</string>
-
+    <string name="cancel">Annuler</string>
+    <string name="cellphone">Téléphone : </string>
+    <string name="city">Ville : </string>
+    <string name="postalcode">CP : </string>
+    <string name="address">Adresse : </string>
+    <string name="name">Nom Prénom : </string>
+    <string name="add_dest">Ajout d\'un destinataire : </string>
+    <string name="info_delivery">Informations Livraison : </string>
+    <string name="dest">Destinataire : </string>
+    <string name="exp">Expéditeur : </string>
+    <string name="number_parcel">Nombre de colis : </string>
 </resources>

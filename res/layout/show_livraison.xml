@@ -13,14 +13,14 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Prochaine Livraison : "
+        android:text="@string/info_delivery"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Expéditeur : "
+        android:text="@string/exp"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -34,7 +34,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Destinataire : "
+        android:text="@string/dest"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -48,7 +48,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombre de Colis : "
+        android:text="@string/number_parcel"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView

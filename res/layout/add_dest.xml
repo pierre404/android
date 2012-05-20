@@ -13,7 +13,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ajout d'un destinataire : "
+        android:text="@string/add_dest"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <LinearLayout
@@ -24,12 +24,12 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nom Prénom : "
+            android:text="@string/name"
             android:textColor="#6d6d6d" />
 
         <EditText
             android:id="@+id/name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
@@ -48,15 +48,16 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Adresse : "
+            android:text="@string/address"
             android:textColor="#6d6d6d" />
 
         <EditText
             android:id="@+id/rue"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:ems="10" />
+            android:ems="10"
+            android:inputType="text" />
 
     </LinearLayout>
 
@@ -68,12 +69,12 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CP : " 
+            android:text="@string/postalcode" 
             android:textColor="#6d6d6d"/>
 
         <EditText
             android:id="@+id/cp"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
@@ -89,15 +90,16 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ville : "
+            android:text="@string/city"
             android:textColor="#6d6d6d" />
 
         <EditText
             android:id="@+id/ville"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:ems="10" />
+            android:ems="10"
+            android:inputType="text" />
 
     </LinearLayout>
 
@@ -109,12 +111,12 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Téléphone : "
+            android:text="@string/cellphone"
             android:textColor="#6d6d6d" />
 
         <EditText
             android:id="@+id/telephone"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
@@ -126,12 +128,12 @@
         android:id="@+id/cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Annuler" />
+        android:text="@string/cancel" />
 
     <Button
         android:id="@+id/validate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Valider" />
+        android:text="@string/validate" />
 
 </LinearLayout>
