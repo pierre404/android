@@ -98,7 +98,7 @@ public class AntExecution {
 			}
 		}
 		
-		int nbVilles = livraisons.size() + 1, nbIterations = 5000, nbFourmis = 200;
+		int nbVilles = livraisons.size() + 1, nbIterations = 50000, nbFourmis = 500;
 		Problem p = new Problem(nbVilles, 5000, 1, (float) .05, distances);
 		p.needreturn = needReturn;
 		AntSystem sys = new AntSystem(nbFourmis, p);

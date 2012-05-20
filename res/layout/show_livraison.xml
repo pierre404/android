@@ -2,14 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
     android:background="@drawable/background"
-    >
+    android:orientation="vertical"
+    android:paddingBottom="40dp"
+    android:paddingLeft="27dp"
+    android:paddingRight="28dp"
+    android:paddingTop="85dp" >
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_marginTop="44dp"
-        android:layout_marginLeft="18dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Prochaine Livraison : "
@@ -17,8 +18,6 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_marginTop="-4dp"
-        android:layout_marginLeft="24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Expéditeur : "
@@ -26,16 +25,13 @@
 
     <TextView
         android:id="@+id/details_exp"
-        android:layout_marginLeft="24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#6d6d6d"
-        android:text="" />
+        android:text=""
+        android:textColor="#6d6d6d" />
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_marginTop="-12dp"
-        android:layout_marginLeft="24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Destinataire : "
@@ -43,16 +39,13 @@
 
     <TextView
         android:id="@+id/details_dest"
-        android:layout_marginLeft="24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#6d6d6d"
-        android:text="" />
+        android:text=""
+        android:textColor="#6d6d6d" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="-10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nombre de Colis : "
@@ -60,18 +53,15 @@
 
     <TextView
         android:id="@+id/nbr_colis"
-        android:layout_marginLeft="24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="" />
-
+
     <Button
         android:id="@+id/launch_navigation"
-        android:background="@drawable/btn_nav"
-        android:layout_marginTop="-8dp"
         android:layout_width="185dp"
         android:layout_height="45dp"
-        android:layout_marginLeft="55dp"
-        />
+        android:layout_gravity="center"
+        android:background="@drawable/btn_nav" />
 
 </LinearLayout>

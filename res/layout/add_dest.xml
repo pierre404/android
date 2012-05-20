@@ -2,7 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@drawable/background"
+    android:paddingTop="85dp"
+    android:paddingBottom="40dp"
+    android:paddingLeft="27dp"
+    android:paddingRight="28dp">
 
     <TextView
         android:id="@+id/textView1"
@@ -19,7 +24,8 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nom Prénom : " />
+            android:text="Nom Prénom : "
+            android:textColor="#6d6d6d" />
 
         <EditText
             android:id="@+id/name"
@@ -42,7 +48,8 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Adresse : " />
+            android:text="Adresse : "
+            android:textColor="#6d6d6d" />
 
         <EditText
             android:id="@+id/rue"
@@ -61,7 +68,8 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CP : " />
+            android:text="CP : " 
+            android:textColor="#6d6d6d"/>
 
         <EditText
             android:id="@+id/cp"
@@ -81,7 +89,8 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ville : " />
+            android:text="Ville : "
+            android:textColor="#6d6d6d" />
 
         <EditText
             android:id="@+id/ville"
@@ -100,7 +109,8 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Téléphone : " />
+            android:text="Téléphone : "
+            android:textColor="#6d6d6d" />
 
         <EditText
             android:id="@+id/telephone"

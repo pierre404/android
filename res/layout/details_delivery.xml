@@ -3,14 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="13" >
+    android:weightSum="13"
+    android:background="@drawable/background" 
+    android:paddingTop="85dp"
+    android:paddingBottom="40dp"
+    android:paddingLeft="27dp"
+    android:paddingRight="28dp">
 
     <TextView
         android:id="@+id/details_exp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
-        android:text="" />
+        android:text=""
+        android:textColor="#6d6d6d" />
 
     <TextView
         android:id="@+id/textView2"
@@ -41,7 +47,8 @@
 
         <Button
             android:id="@+id/accept_parcel"
-            android:layout_width="100dp"
+            android:textSize="13dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="@string/accept_parcel"
             android:layout_marginRight="10dp"
@@ -49,7 +56,8 @@
 
         <Button
             android:id="@+id/deny_parcel"
-            android:layout_width="100dp"
+            android:textSize="13dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content" 
             android:text="@string/deny_parcel"
             android:layout_marginRight="10dp"
@@ -57,7 +65,8 @@
 
         <Button
             android:id="@+id/absent"
-            android:layout_width="100dp"
+            android:textSize="13dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="@string/absent"
             android:layout_gravity="center" />

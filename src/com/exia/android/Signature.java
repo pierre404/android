@@ -1,19 +1,14 @@
 package com.exia.android;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.net.Uri;
-import android.provider.MediaStore.Images;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -29,14 +24,14 @@ public class Signature extends SurfaceView implements SurfaceHolder.Callback {
 	private static Paint paint;
 	SurfaceHolder holder;
 
-	// constructeur
+	// constructeur 
 	public Signature(Context context) {
+
 		super(context);
 		holder = getHolder();
 		holder.addCallback(this);
 
 	}
-
 	// constructeur
 	public Signature(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -44,7 +39,6 @@ public class Signature extends SurfaceView implements SurfaceHolder.Callback {
 		holder.addCallback(this);
 
 	}
-
 	// constructeur
 	public Signature(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -53,7 +47,7 @@ public class Signature extends SurfaceView implements SurfaceHolder.Callback {
 
 	}
 
-	// Permet le tracé de la signature quand l'utilisateur agit sur l'écran.
+	// Permet le tracé de la signature quand l'utilisateur agit sur l'écran. 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		float cx = event.getX();
@@ -67,7 +61,7 @@ public class Signature extends SurfaceView implements SurfaceHolder.Callback {
 		case MotionEvent.ACTION_MOVE:
 
 			paint.setStrokeWidth(5);
-			paint.setColor(0xffff0000);
+			paint.setColor(0xff000000);
 			surface.drawLine(cx, cy, oldcx, oldcy, paint);
 			break;
 
@@ -104,7 +98,7 @@ public class Signature extends SurfaceView implements SurfaceHolder.Callback {
 		paint.setColor(0xffffffff);
 		surface.drawPaint(paint);
 	}
-
+	
 	// création de l'espace et la surface ou la signature va être effectuée
 	public void surfaceCreated(SurfaceHolder holder) {
 		buffer = Bitmap.createBitmap(this.getWidth(), this.getHeight(),
@@ -121,44 +115,38 @@ public class Signature extends SurfaceView implements SurfaceHolder.Callback {
 		// TODO Auto-generated method stub
 
 	}
-
-	// permet de réinisialiser la surface de dessin de la signature (permet
-	// d'éffacer la signature)
+	
+	// permet de réinisialiser la surface de dessin de la signature (permet d'éffacer la signature)
 	public void resetSurface() {
 		paint.setColor(0xffffffff);
 		surface.drawPaint(paint);
 		this.invalidate();
 	}
-
+	
+	
 	// permet de sauvegarder la signature
-	public void saveBitmap(Context context) {
+	public void saveBitmap(Context context, String numColis) {
+		
+		     File myDir= new File("/sdcard/signature");
+		     myDir.mkdirs();
+		     String fname = "sign-"+ numColis +".PNG";
+		     File file = new File (myDir, fname);
+		     if (file.exists ()) file.delete ();
+		    
+		     try {
+		    	 
+		            FileOutputStream out = new FileOutputStream(file);
+		            buffer.compress(Bitmap.CompressFormat.PNG, 100, out);
+		            out.flush();
+		            out.close();
+		            
+		     } catch (Exception e) {
+		            e.printStackTrace();
+		     }
+		     
+		     resetSurface();
+ 
+    }
 
-		String filename = String.valueOf(System.currentTimeMillis());
-		ContentValues values = new ContentValues();
-		values.put(Images.Media.TITLE, filename);
-		values.put(Images.Media.DATE_ADDED, System.currentTimeMillis());
-		values.put(Images.Media.MIME_TYPE, "image/jpeg");
-
-		Uri uri = context.getContentResolver().insert(
-				Images.Media.EXTERNAL_CONTENT_URI, values);
-
-		try {
-
-			OutputStream outStream = context.getContentResolver()
-					.openOutputStream(uri);
-			buffer.compress(Bitmap.CompressFormat.PNG, 100, outStream);
-			outStream.flush();
-			outStream.close();
-			Log.d("done", "done");
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-
-		}
-
-	}
-
+	
 }

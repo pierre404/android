@@ -16,6 +16,13 @@ import com.classes.projet.Livraison;
 import com.classes.projet.Tournee;
 import com.exia.algoant.AntExecution;
 
+/**
+ * 
+ * Classe permettant d'ajouté une adresse de destination où récupéré un colis
+ * 
+ * @author Benoit
+ *
+ */
 public class AddDest extends Activity {
 
 	private EditText nom;
@@ -30,19 +37,26 @@ public class AddDest extends Activity {
 	private ProgressDialog chargement;
 	private Handler handler;
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_dest);
+		
+		//Bouton valider et annuler
 		cancel = (Button) findViewById(R.id.cancel);
 		validate = (Button) findViewById(R.id.validate);
 		
+		//Les différents champs de saisie
 		nom = (EditText) findViewById(R.id.name);
 		rue = (EditText) findViewById(R.id.rue);
 		cp = (EditText) findViewById(R.id.cp);
 		ville = (EditText) findViewById(R.id.ville);
 		telephone = (EditText) findViewById(R.id.telephone);
 
+		//Action sur le bouton annuler
 		cancel.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -51,10 +65,12 @@ public class AddDest extends Activity {
 			}
 		});
 
+		//Action sur le bouton valider
 		validate.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
+				//Message affichant le chargement
 				chargement = new ProgressDialog(AddDest.this);
 				chargement.setMessage("Chargement ...");
 				handler = new Handler() {
@@ -68,12 +84,18 @@ public class AddDest extends Activity {
 				};
 
 				chargement.show();
+				//Thread éxécutant la fonction calculant l'ordre des livraisons
 				new Thread() {
 					public void run() {
+						//Récupération des données de l'expéditeur, récupération des coordonnées et ajout à la liste
 						Expediteur e = new Expediteur(nom.getText().toString(), rue.getText().toString(), cp.getText().toString(), ville.getText().toString(), telephone.getText().toString());
 						e.setCoordGPS(new CoordGPS(e.getRue() + " " + e.getCp() + " " + e.getVille(), AddDest.this));
 						Tournee.getInstance().getListeLivraison().add(new Livraison("", e, null, 0, 0, ""));
+						
+						//Préparation de l'algorithme de colonie de fourmie
 						AntExecution ae = new AntExecution(Tournee.getInstance().getListeLivraison(), false, new CoordGPS(Utils.getLocationGPS(AddDest.this)[0], Utils.getLocationGPS(AddDest.this)[1]));
+						
+						//Puis on lance le tout
 						Tournee.getInstance().setListeLivraison(ae.run());
 						handler.sendEmptyMessage(0);
 						finish();
@@ -84,6 +106,9 @@ public class AddDest extends Activity {
 		});
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onBackPressed()
+	 */
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();

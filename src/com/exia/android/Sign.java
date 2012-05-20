@@ -11,6 +11,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+/**
+ * Activité servant à afficher le formulaire de signature
+ * 
+ * @author Benoit
+ *
+ */
 public class Sign extends Activity {
 	
 	private Signature s;
@@ -19,6 +25,9 @@ public class Sign extends Activity {
 	
 	private int indexDelivery;
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,6 +39,8 @@ public class Sign extends Activity {
 		erase = (Button)findViewById(R.id.erase_sign);
 		validate = (Button)findViewById(R.id.validate_sign);
 		
+		
+		//Bouton effacer du formulaire
 		erase.setOnClickListener(new OnClickListener() {			
 			@Override
 			public void onClick(View v) {
@@ -37,11 +48,15 @@ public class Sign extends Activity {
 			}
 		});
 		
+		//Bouton valider
 		validate.setOnClickListener(new OnClickListener() {			
 			@Override
 			public void onClick(View v) {
-				s.saveBitmap(Sign.this);				
+				//On enregistre l'image
+				s.saveBitmap(Sign.this, Tournee.getInstance().getListeLivraison().get(indexDelivery).getId());
+				//On modifie la date
 				Tournee.getInstance().getListeLivraison().get(indexDelivery).setDate(new Date());
+				//et les coordonnées GPS de la livraisons
 				double[] d = Utils.getLocationGPS(Sign.this);
 				Tournee.getInstance().getListeLivraison().get(indexDelivery).setCoordGPS(new CoordGPS(d[0], d[1]));
 				setResult(1);
@@ -50,6 +65,9 @@ public class Sign extends Activity {
 		});
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onBackPressed()
+	 */
 	@Override
 	public void onBackPressed()         
 	{

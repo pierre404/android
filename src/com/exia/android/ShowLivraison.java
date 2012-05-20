@@ -12,6 +12,12 @@ import android.widget.TextView;
 import com.classes.projet.Livraison;
 import com.classes.projet.Tournee;
 
+/**
+ * Affichage des informations d'une livraison
+ * 
+ * @author Benoit
+ *
+ */
 public class ShowLivraison extends Activity {
 	
 	private TextView detailsDest;
@@ -20,15 +26,21 @@ public class ShowLivraison extends Activity {
 	private Button navigation;
 	private Livraison currentLivraison = null;
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.show_livraison);
 		
+		//On récupère la tournée
 		Tournee t = Tournee.getInstance();
 		
+		//Ainsi que la livraison en cours
 		currentLivraison = t.getListeLivraison().get(this.getIntent().getExtras().getInt("indexDelivery"));
 		
+		//Si le destinataire n'est pas null, on affiche ses informations
 		if(currentLivraison.getDestinataire() != null)
 		{
 			detailsDest = (TextView) findViewById(R.id.details_dest);		
@@ -41,6 +53,7 @@ public class ShowLivraison extends Activity {
 					+ "Portable : "  + currentLivraison.getDestinataire().getPortable() + "\n");
 		}
 		
+		//Affichage des informations de l'expéditeur
 		detailsExp = (TextView) findViewById(R.id.details_exp);
 		detailsExp.setText("Nom Prénom : " + currentLivraison.getExpediteur().getNom() + "\n"
 				+ "Adresse : "  + currentLivraison.getExpediteur().getRue() + "\n"
@@ -49,6 +62,7 @@ public class ShowLivraison extends Activity {
 				+ "Téléphone : "  + currentLivraison.getExpediteur().getTelephone() + "\n");
 		//nbrColis.setText(currentLivraison.getNbr_colis());
 		
+		//On affecte l'action au bouton pour lancer la navigation
 		navigation = (Button)findViewById(R.id.launch_navigation);
 		navigation.setOnClickListener(new OnClickListener() {
 			
@@ -75,6 +89,9 @@ public class ShowLivraison extends Activity {
 		return i;
 	}*/
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onBackPressed()
+	 */
 	@Override
 	public void onBackPressed()         
 	{
