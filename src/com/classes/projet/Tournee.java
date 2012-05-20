@@ -23,7 +23,8 @@ public class Tournee implements java.io.Serializable {
          return Tournee.instance;
      }
 	
-	public Tournee() {		
+	private Tournee() {
+		listeLivraison = new ArrayList<Livraison>();
 	}
 
 	/*Attribut*/

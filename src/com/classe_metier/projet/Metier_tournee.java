@@ -38,9 +38,9 @@ public class Metier_tournee
 	
 	public void ajout_coord_GPS(Destinataire un_destinataire,Livraison une_livraison, Context context)
 	{
-		String test=un_destinataire.getNom()+un_destinataire.getRue()+un_destinataire.getCp()+un_destinataire.getVille();
+		String test=un_destinataire.getRue()+ " " +un_destinataire.getCp() + " " + un_destinataire.getVille();
 		CoordGPS gps = new CoordGPS(test,context);
-		une_livraison.setCoordGPS(gps);
+		un_destinataire.setCoordGPS(gps);
 	}
 	
 	public void ajout_info_livraison(Livraison la_livraison, int nbr_livraison, Context le_contexte)
@@ -103,13 +103,13 @@ public class Metier_tournee
 	{
 		Destinataire un_destinataire= new Destinataire();
 		
-		un_destinataire.setNom(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/expediteur/nom"));
-		un_destinataire.setRue(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/expediteur/rue"));
-		un_destinataire.setCp(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/expediteur/cp"));
-		un_destinataire.setVille(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/expediteur/ville"));
-		un_destinataire.setComplement_adresse(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/expediteur/complement_adresse"));
-		un_destinataire.setTelephone(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/expediteur/telephone"));
-		un_destinataire.setPortable(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/expediteur/portable"));
+		un_destinataire.setNom(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/destinataire/nom"));
+		un_destinataire.setRue(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/destinataire/rue"));
+		un_destinataire.setCp(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/destinataire/cp"));
+		un_destinataire.setVille(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/destinataire/ville"));
+		un_destinataire.setComplement_adresse(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/destinataire/complement_adresse"));
+		un_destinataire.setTelephone(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/destinataire/telephone"));
+		un_destinataire.setPortable(xml.recup_donnee("/sdcard/tournee.xml", "//livraison["+num_livraison+"]/destinataire/portable"));
 	
 		la_livraison.setDestinataire(un_destinataire);
 	}

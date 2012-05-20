@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.classe_metier.projet.ExportationXML;
 import com.classe_metier.projet.Metier_tournee;
 import com.classes.projet.Colis;
 import com.classes.projet.Livraison;
@@ -90,6 +91,8 @@ public class ProjetandroidActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
+				ExportationXML test_exportation = new ExportationXML();
+			    test_exportation.exportation(t);
 				ProjetandroidActivity.this.finish();
 			}
 		});
