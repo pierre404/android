@@ -10,10 +10,10 @@ public class Livraison {
 		this.id = id;
 		this.expediteur = expediteur;
 		this.destinataire = destinataire;
-		this.status=status;
-		this.motif_refus=motif_refus;
 		this.commentaire=commentaire;
 		this.listeColis = new ArrayList<Colis>();
+		this.status=status;
+		this.motif_refus=motif_refus;
 	}
 	
 	public Livraison() {
@@ -24,9 +24,10 @@ public class Livraison {
 	private Destinataire destinataire;
 	private int status,motif_refus,nombre_Colis;
 	private String commentaire,id;
-	private ArrayList<Colis> listeColis;
+	private ArrayList<Colis> listeColis= new ArrayList<Colis>();
 	private Date date_livraison;
 	private CoordGPS coordGPS;
+	private double poids_total;
 	
 	/*Getter & Setter*/
 	public String getId() {
@@ -34,6 +35,16 @@ public class Livraison {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public double getPoids_total()
+	{
+		return poids_total;
+	}
+	
+	public void setPoids_total(double le_poids)
+	{
+		this.poids_total=le_poids;
 	}
 	
 	public Date getDate() {
