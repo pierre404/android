@@ -1,5 +1,7 @@
 package com.exia.android;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -82,7 +84,8 @@ public class AddDest extends Activity {
 						}
 					}
 				};
-
+				chargement.setCancelable(false);
+				chargement.setCanceledOnTouchOutside(false);
 				chargement.show();
 				//Thread éxécutant la fonction calculant l'ordre des livraisons
 				new Thread() {
@@ -92,11 +95,31 @@ public class AddDest extends Activity {
 						e.setCoordGPS(new CoordGPS(e.getRue() + " " + e.getCp() + " " + e.getVille(), AddDest.this));
 						Tournee.getInstance().getListeLivraison().add(new Livraison("", e, null, 0, 0, ""));
 						
+						ArrayList<Livraison> remainingLivraison = new ArrayList<Livraison>();
+						ArrayList<Livraison> doneLivraison = new ArrayList<Livraison>();
+						
+						for(int i = 0; i < Tournee.getInstance().getListeLivraison().size(); i++)
+						{
+							if(Tournee.getInstance().getListeLivraison().get(i).getStatuts() != 0)
+							{
+								doneLivraison.add(Tournee.getInstance().getListeLivraison().get(i));
+							}
+							else
+							{
+								remainingLivraison.add(Tournee.getInstance().getListeLivraison().get(i));
+							}							
+						}
+						
 						//Préparation de l'algorithme de colonie de fourmie
-						AntExecution ae = new AntExecution(Tournee.getInstance().getListeLivraison(), false, new CoordGPS(Utils.getLocationGPS(AddDest.this)[0], Utils.getLocationGPS(AddDest.this)[1]));
+						AntExecution ae = new AntExecution(remainingLivraison, false, new CoordGPS(Utils.getLocationGPS(AddDest.this)[0], Utils.getLocationGPS(AddDest.this)[1]));
+						
+						ArrayList<Livraison> newOrderLivr = new ArrayList<Livraison>();
+						newOrderLivr.addAll(doneLivraison);
 						
 						//Puis on lance le tout
-						Tournee.getInstance().setListeLivraison(ae.run());
+						newOrderLivr.addAll(ae.run());
+						
+						Tournee.getInstance().setListeLivraison(newOrderLivr);
 						handler.sendEmptyMessage(0);
 						finish();
 					};

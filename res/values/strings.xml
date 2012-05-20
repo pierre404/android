@@ -18,9 +18,10 @@
     <string name="postalcode">CP : </string>
     <string name="address">Adresse : </string>
     <string name="name">Nom Prénom : </string>
-    <string name="add_dest">Ajout d\'un destinataire : </string>
     <string name="info_delivery">Informations Livraison : </string>
     <string name="dest">Destinataire : </string>
     <string name="exp">Expéditeur : </string>
     <string name="number_parcel">Nombre de colis : </string>
+    <string name="add_exp">Ajout d\' expéditeur :  </string>
+    <string name="collect">Coli(s) collecté(s)</string>
 </resources>

@@ -64,4 +64,10 @@
         android:layout_gravity="center"
         android:background="@drawable/btn_nav" />
 
+    <Button
+        android:id="@+id/collect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/collect" />
+
 </LinearLayout>
