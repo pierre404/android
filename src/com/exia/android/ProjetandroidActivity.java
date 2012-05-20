@@ -31,6 +31,7 @@ public class ProjetandroidActivity extends Activity {
 	private Button leaveButton = null;
 	private Button scanButton = null;
 	private Button showListButton = null;
+	private Button addDest = null;
 	private Tournee t;
 	private ArrayList<Colis> colisscane = new ArrayList<Colis>();
 	private Livraison currentLivraison;
@@ -48,13 +49,14 @@ public class ProjetandroidActivity extends Activity {
 		leaveButton = (Button) findViewById(R.id.leave);
 		scanButton = (Button) findViewById(R.id.scan_parcel);
 		showListButton = (Button) findViewById(R.id.show_list);
+		addDest = (Button) findViewById(R.id.add_dest);
 
 		scanButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(
-						"com.google.zxing.client.android.SCAN");
+						"com.exia.android.android.SCAN");
 				intent.putExtra("SCAN_MODE", "PRODUCT_MODE");
 				intent.putExtra("SCAN_WIDTH", 800);
 				intent.putExtra("SCAN_HEIGHT", 200);
@@ -69,6 +71,16 @@ public class ProjetandroidActivity extends Activity {
 			public void onClick(View v) {
 				Intent i = new Intent(ProjetandroidActivity.this,
 						MapsActivity.class);
+				startActivity(i);
+			}
+		});
+		
+		addDest.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(ProjetandroidActivity.this,
+						AddDest.class);
 				startActivity(i);
 			}
 		});
@@ -226,14 +238,14 @@ public class ProjetandroidActivity extends Activity {
 						"Exia.cesi", "1 rue G Marconi", "76130",
 						"Mont Saint Aignan", "0235214256"), d3, 0, 0, "");
 				Destinataire d4 = new Destinataire("Pierre Ruggirello", "",
-						"27200", "Vernon", "", "0640191362", "0640191362");
+						"76500", "Elbeuf", "", "0640191362", "0640191362");
 				d4.setCoordGPS(new CoordGPS(d4.getRue() + " " + d4.getCp()
 						+ " " + d4.getVille(), ProjetandroidActivity.this));
 				Livraison l4 = new Livraison("505465654", new Expediteur(
 						"Exia.cesi", "1 rue G Marconi", "76130",
 						"Mont Saint Aignan", "0235214256"), d4, 0, 0, "");
 				Expediteur e1 = new Expediteur("Guillaume Verna", "",
-						"76200", "Dieppe", "0640168542");
+						"75000", "Paris", "0640168542");
 				e1.setCoordGPS(new CoordGPS(e1.getRue() + " " + e1.getCp()
 						+ " " + e1.getVille(), ProjetandroidActivity.this));
 				Livraison l5 = new Livraison("505465654", e1, null, 0, 0, "");
@@ -249,8 +261,8 @@ public class ProjetandroidActivity extends Activity {
 				t = Tournee.getInstance();
 
 				t.setListeLivraison(list);
-
-				AntExecution ae = new AntExecution(t.getListeLivraison(), true);
+				
+				AntExecution ae = new AntExecution(t.getListeLivraison());
 
 				t.setListeLivraison(ae.run());
 				handler.sendEmptyMessage(0);

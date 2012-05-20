@@ -16,23 +16,64 @@ public class AntExecution {
 	private boolean needReturn = true;
 
 	private CoordGPS coordGPSRepository;
-
-	public AntExecution(ArrayList<Livraison> livraisons, boolean needReturn) {
+	
+	private CoordGPS currentPos;
+	
+	public AntExecution(ArrayList<Livraison> livraisons) {
+		this.livraisons = livraisons;
+		coordGPSRepository = new CoordGPS(latRepository, lonRepository);
+	}
+	
+	public AntExecution(ArrayList<Livraison> livraisons, boolean needReturn, CoordGPS currentPos) {
 		this.livraisons = livraisons;
 		this.needReturn = needReturn;
+		this.currentPos = currentPos;
 		coordGPSRepository = new CoordGPS(latRepository, lonRepository);
 	}
 
-	public ArrayList<Livraison> run() {
-		distances = new int[livraisons.size() + 1][livraisons.size() + 1];
+	public ArrayList<Livraison> run() {		
 		CoordGPS coordGPSa;
 		CoordGPS coordGPSb;
-		int posRepository = 0;
-		int startIndex = 1;
 		if(!needReturn)
 		{
-			posRepository = livraisons.size();
-			startIndex = 0;
+			distances = new int[livraisons.size() + 2][livraisons.size() + 2];
+			for (int i = 1; i < livraisons.size() + 1; i++) {
+				if (livraisons.get(i - 1).getDestinataire() == null) {
+					distances[0][i] = distances[i][0] = getDistance(
+							currentPos, livraisons.get(i - 1)
+									.getExpediteur().getCoordGPS());
+				} else {
+					distances[0][i] = distances[i][0] = getDistance(
+							currentPos, livraisons.get(i - 1)
+									.getDestinataire().getCoordGPS());
+				}
+			}
+			for (int i = 1; i < livraisons.size() + 1; i++) {
+				if (livraisons.get(i - 1).getDestinataire() == null) {
+					distances[livraisons.size() + 1][i] = distances[i][livraisons.size() + 1] = getDistance(
+							coordGPSRepository, livraisons.get(i - 1)
+									.getExpediteur().getCoordGPS());
+				} else {
+					distances[livraisons.size() + 1][i] = distances[i][livraisons.size() + 1] = getDistance(
+							coordGPSRepository, livraisons.get(i - 1)
+									.getDestinataire().getCoordGPS());
+				}
+			}
+		}
+		else
+		{
+			distances = new int[livraisons.size() + 1][livraisons.size() + 1];
+			for (int i = 1; i < livraisons.size() + 1; i++) {
+				if (livraisons.get(i - 1).getDestinataire() == null) {
+					distances[0][i] = distances[i][0] = getDistance(
+							coordGPSRepository, livraisons.get(i - 1)
+									.getExpediteur().getCoordGPS());
+				} else {
+					distances[0][i] = distances[i][0] = getDistance(
+							coordGPSRepository, livraisons.get(i - 1)
+									.getDestinataire().getCoordGPS());
+				}
+			}
 		}
 		for (int i = 1; i < livraisons.size() + 1; i++) {
 			for (int j = 1; j < livraisons.size() + 1; j++) {
@@ -56,20 +97,8 @@ public class AntExecution {
 				distances[i][j] = getDistance(coordGPSa, coordGPSb);
 			}
 		}
-
-		for (int i = 1; i < livraisons.size() + 1; i++) {
-			if (livraisons.get(i - 1).getDestinataire() == null) {
-				distances[0][i] = distances[i][0] = getDistance(
-						coordGPSRepository, livraisons.get(i - 1)
-								.getExpediteur().getCoordGPS());
-			} else {
-				distances[0][i] = distances[i][0] = getDistance(
-						coordGPSRepository, livraisons.get(i - 1)
-								.getDestinataire().getCoordGPS());
-			}
-		}
-
-		int nbVilles = distances.length, nbIterations = 5000, nbFourmis = 200;
+		
+		int nbVilles = livraisons.size() + 1, nbIterations = 5000, nbFourmis = 200;
 		Problem p = new Problem(nbVilles, 5000, 1, (float) .05, distances);
 		p.needreturn = needReturn;
 		AntSystem sys = new AntSystem(nbFourmis, p);

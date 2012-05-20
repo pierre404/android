@@ -103,6 +103,8 @@ public class Ant {
 	                // on revient vers le nid
 	            	if(data.needreturn)
 	            		tmpVisitedLength += data.distances[currentDestination][0];
+	            	else
+	            		tmpVisitedLength += data.distances[currentDestination][data.nbCities];
 
 					status = RETURNING;
 	                currentOrigin =  visitedCities.size()-1;
