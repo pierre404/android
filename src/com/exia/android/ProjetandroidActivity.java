@@ -9,14 +9,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.classe_metier.projet.Metier_tournee;
 import com.classes.projet.Colis;
-import com.classes.projet.CoordGPS;
-import com.classes.projet.Destinataire;
-import com.classes.projet.Expediteur;
 import com.classes.projet.Livraison;
 import com.classes.projet.Tournee;
 import com.exia.algoant.AntExecution;
@@ -45,6 +44,8 @@ public class ProjetandroidActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
+		Log.i("Position GPS", Utils.getLocationGPS(this)[0] + " " + Utils.getLocationGPS(this)[0]);
 
 		leaveButton = (Button) findViewById(R.id.leave);
 		scanButton = (Button) findViewById(R.id.scan_parcel);
@@ -215,7 +216,7 @@ public class ProjetandroidActivity extends Activity {
 		chargement.show();
 		new Thread() {
 			public void run() {
-				Destinataire d1 = new Destinataire("Mouquet Benoit",
+				/*Destinataire d1 = new Destinataire("Mouquet Benoit",
 						"9, rue du beau soleil", "76660", "Londinières", "",
 						"0640191362", "0640191362");
 				d1.setCoordGPS(new CoordGPS(d1.getRue() + " " + d1.getCp()
@@ -259,10 +260,14 @@ public class ProjetandroidActivity extends Activity {
 				list.add(l2);
 				list.add(l3);
 				list.add(l4);
-				list.add(l5);
-				t = Tournee.getInstance();
+				list.add(l5);*/
+				//t = Tournee.getInstance();
 
-				t.setListeLivraison(list);
+				//t.setListeLivraison(list);
+				
+				t = Tournee.getInstance();
+			    Metier_tournee mt= new Metier_tournee();
+			    mt.mai_ajout_livraison(ProjetandroidActivity.this);
 				
 				AntExecution ae = new AntExecution(t.getListeLivraison());
 
