@@ -13,7 +13,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_dest"
+        android:text="@string/add_exp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <LinearLayout

@@ -200,6 +200,8 @@ public class ProjetandroidActivity extends Activity {
 	private void chargementDonnees() {
 		chargement = new ProgressDialog(this);
 		chargement.setMessage("Chargement ...");
+		chargement.setCancelable(false);
+		chargement.setCanceledOnTouchOutside(false);
 		handler = new Handler() {
 			public void handleMessage(Message msg) {
 				switch (msg.what) {

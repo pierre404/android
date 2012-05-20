@@ -66,21 +66,33 @@ public class MapsActivity extends MapActivity {
 
 		List<Overlay> mapOverlays = mv.getOverlays();
 		mapOverlays.removeAll(mapOverlays);
-		
-		//On charge les différents marqueurs		
+
+		// On charge les différents marqueurs
 		Drawable drawableBlue = this.getResources().getDrawable(
 				R.drawable.marker);
 		Drawable drawableRed = this.getResources().getDrawable(
 				R.drawable.marker2);
 		Drawable drawableGreen = this.getResources().getDrawable(
 				R.drawable.marker3);
+		Drawable drawableYellow = this.getResources().getDrawable(
+				R.drawable.marker4);
 		CustomItemizedOverlay itemizedoverlay = new CustomItemizedOverlay(
 				drawableBlue, this);
 
+		drawableRed.setBounds(0 - drawableRed.getIntrinsicWidth() / 2,
+				0 - drawableRed.getIntrinsicHeight(),
+				drawableRed.getIntrinsicWidth() / 2, 0);
+		drawableGreen.setBounds(0 - drawableGreen.getIntrinsicWidth() / 2,
+				0 - drawableGreen.getIntrinsicHeight(),
+				drawableGreen.getIntrinsicWidth() / 2, 0);
+		drawableYellow.setBounds(0 - drawableYellow.getIntrinsicWidth() / 2,
+				0 - drawableYellow.getIntrinsicHeight(),
+				drawableYellow.getIntrinsicWidth() / 2, 0);
+
 		int latitude;
 		int longitude;
-		
-		//Pour chaque livraisons on récupére les coordonnées
+
+		// Pour chaque livraisons on récupére les coordonnées
 		for (int i = 0; i < livraisons.size(); i++) {
 			if (livraisons.get(i).getDestinataire() == null) {
 				latitude = (int) (livraisons.get(i).getExpediteur()
@@ -93,33 +105,31 @@ public class MapsActivity extends MapActivity {
 				longitude = (int) (livraisons.get(i).getDestinataire()
 						.getCoordGPS().getLongitude() * 1000000);
 			}
-			
-			//On charge le point à afficher sur la map
+
+			// On charge le point à afficher sur la map
 			GeoPoint point = new GeoPoint(latitude, longitude);
 
-			//Et on ajout le point à la liste
+			// Et on ajout le point à la liste
 			OverlayItem overlayitem = new OverlayItem(point,
 					String.valueOf(i + 1), "");
 			itemizedoverlay.addOverlay(overlayitem);
 
-			//On modifie le marqueur pas défaut dans le cas d'une récupération de colis, ou de livraisons déjà effectuées
-			if (livraisons.get(i).getCoordGPS() != null) {
-				drawableRed.setBounds(0 - drawableRed.getIntrinsicWidth() / 2,
-						0 - drawableRed.getIntrinsicHeight(),
-						drawableRed.getIntrinsicWidth() / 2, 0);
+			// On modifie le marqueur pas défaut dans le cas d'une récupération
+			// de colis, ou de livraisons déjà effectuées
+			if (livraisons.get(i).getStatuts() == 4) {
+				overlayitem.setMarker(drawableYellow);
+			} else if (livraisons.get(i).getStatuts() > 0) {
 				overlayitem.setMarker(drawableRed);
 			} else if (livraisons.get(i).getDestinataire() == null) {
-				drawableGreen.setBounds(
-						0 - drawableRed.getIntrinsicWidth() / 2,
-						0 - drawableRed.getIntrinsicHeight(),
-						drawableRed.getIntrinsicWidth() / 2, 0);
+
 				overlayitem.setMarker(drawableGreen);
 			}
 		}
 
 		mapOverlays.add(itemizedoverlay);
 		MapController controller = mv.getController();
-		//On défini le zoom et le centre de la map afin d'afficher tous les points
+		// On défini le zoom et le centre de la map afin d'afficher tous les
+		// points
 		controller.zoomToSpan(itemizedoverlay.getLatSpanE6(),
 				itemizedoverlay.getLonSpanE6());
 		controller.setCenter(itemizedoverlay.getCenter());
@@ -128,7 +138,9 @@ public class MapsActivity extends MapActivity {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Activity#onBackPressed()
 	 */
 	@Override
