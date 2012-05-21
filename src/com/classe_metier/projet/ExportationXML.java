@@ -145,15 +145,12 @@ public class ExportationXML {
 			 * gps=une_livraison.getCoordGPS();
 			 */
 
-			ecriture_dans_XML(nom_fichier,
-					"		<nbr_colis>" + une_livraison.getNbr_colis()
-							+ "</nbr_colis>\n");
 			ecriture_dans_XML(nom_fichier, "		<id>" + une_livraison.getId()
 					+ "</id>\n");
 			ecriture_dans_XML(nom_fichier, "		<date>" + une_livraison.getDate()
 					+ "</date>\n");
 			ecriture_dans_XML(nom_fichier,
-					"		<statut>" + une_livraison.getStatuts() + "</statut>\n");
+					"		<status>" + une_livraison.getStatuts() + "</status>\n");
 			ecriture_dans_XML(nom_fichier,
 					"		<commentaire>" + une_livraison.getCommentaire()
 							+ "</commentaire>\n");
@@ -168,7 +165,7 @@ public class ExportationXML {
 			ecriture_dans_XML(nom_fichier, "			<cp>"
 					+ une_livraison.getExpediteur().getCp() + "</cp>\n");
 			ecriture_dans_XML(nom_fichier, "			<ville>"
-					+ une_livraison.getExpediteur().getNom() + "</ville>\n");
+					+ une_livraison.getExpediteur().getVille() + "</ville>\n");
 			ecriture_dans_XML(nom_fichier, "			<telephone>"
 					+ une_livraison.getExpediteur().getTelephone()
 					+ "</telephone>\n");
@@ -206,6 +203,9 @@ public class ExportationXML {
 				ecriture_dans_XML(nom_fichier, "		</coordonnees_GPS>\n");
 			}
 			ecriture_dans_XML(nom_fichier, "		<colis>\n");
+			ecriture_dans_XML(nom_fichier,
+					"			<nbr_colis>" + une_livraison.getNbr_colis()
+							+ "</nbr_colis>\n");
 
 			while (une_livraison.getNbr_colis() > nbr_colis) {
 				Colis un_colis = new Colis();

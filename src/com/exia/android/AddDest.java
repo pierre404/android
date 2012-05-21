@@ -94,6 +94,7 @@ public class AddDest extends Activity {
 						Expediteur e = new Expediteur(nom.getText().toString(), rue.getText().toString(), cp.getText().toString(), ville.getText().toString(), telephone.getText().toString());
 						e.setCoordGPS(new CoordGPS(e.getRue() + " " + e.getCp() + " " + e.getVille(), AddDest.this));
 						Tournee.getInstance().getListeLivraison().add(new Livraison("", e, null, 0, 0, ""));
+						Tournee.getInstance().setNbr(Tournee.getInstance().getNbr() + 1);
 						
 						ArrayList<Livraison> remainingLivraison = new ArrayList<Livraison>();
 						ArrayList<Livraison> doneLivraison = new ArrayList<Livraison>();

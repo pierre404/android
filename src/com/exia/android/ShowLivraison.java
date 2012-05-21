@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.classes.projet.CoordGPS;
 import com.classes.projet.Livraison;
 import com.classes.projet.Tournee;
 import com.exia.constants.Status;
@@ -92,7 +93,7 @@ public class ShowLivraison extends Activity {
 				+ currentLivraison.getExpediteur().getVille() + "\n"
 				+ "Téléphone : "
 				+ currentLivraison.getExpediteur().getTelephone() + "\n");
-		
+
 		nbrColis = (TextView) findViewById(R.id.nbr_colis);
 		nbrColis.setText(currentLivraison.getNbr_colis() + "");
 
@@ -102,12 +103,14 @@ public class ShowLivraison extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				String url = "google.navigation:q="
-						+ currentLivraison.getDestinataire().getCoordGPS()
-								.getLatitude()
-						+ ","
-						+ currentLivraison.getDestinataire().getCoordGPS()
-								.getLongitude();
+				CoordGPS coordGPS;
+				if (currentLivraison.getDestinataire() != null) {
+					coordGPS = currentLivraison.getDestinataire().getCoordGPS();
+				} else {
+					coordGPS = currentLivraison.getExpediteur().getCoordGPS();
+				}
+				String url = "google.navigation:q=" + coordGPS.getLatitude()
+						+ "," + coordGPS.getLongitude();
 				Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 				startActivity(i);
 			}

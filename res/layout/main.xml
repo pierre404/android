@@ -9,8 +9,9 @@
         android:id="@+id/leave"
         android:layout_width="22dp"
         android:layout_height="22dp"
-        android:layout_marginLeft="295dp"
+      	android:layout_gravity="right"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/btn_quit" />
 
     <Button
@@ -26,14 +27,15 @@
         android:layout_width="140dp"
         android:layout_height="109dp"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/btn_list" />
 
     <Button
         android:id="@+id/add_dest"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:layout_gravity="center"
+        android:layout_marginTop="30dp"
         android:background="@drawable/btn_adresse" />
 
 </LinearLayout>

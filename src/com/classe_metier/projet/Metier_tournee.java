@@ -225,6 +225,8 @@ public class Metier_tournee {
 		un_colis.setPoids(xml.recup_donnee("/sdcard/tournee.xml",
 				"//livraison[" + nbr_livraison + "]/colis/paquet[" + nbr_colis
 						+ "]/poids"));
+		
+		la_livraison.setPoids_total(la_livraison.getPoids_total()+Double.parseDouble(un_colis.getPoids()));
 		la_livraison.setColis(un_colis);
 	}
 
