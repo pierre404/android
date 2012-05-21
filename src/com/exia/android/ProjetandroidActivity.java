@@ -38,15 +38,19 @@ public class ProjetandroidActivity extends Activity {
 	private ProgressDialog chargement;
 	private Handler handler;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
-		Log.i("Position GPS", Utils.getLocationGPS(this)[0] + " " + Utils.getLocationGPS(this)[0]);
+
+		Log.i("Position GPS",
+				Utils.getLocationGPS(this)[0] + " "
+						+ Utils.getLocationGPS(this)[0]);
 
 		leaveButton = (Button) findViewById(R.id.leave);
 		scanButton = (Button) findViewById(R.id.scan_parcel);
@@ -57,8 +61,7 @@ public class ProjetandroidActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(
-						"com.exia.android.android.SCAN");
+				Intent intent = new Intent("com.exia.android.android.SCAN");
 				intent.putExtra("SCAN_MODE", "PRODUCT_MODE");
 				intent.putExtra("SCAN_WIDTH", 800);
 				intent.putExtra("SCAN_HEIGHT", 200);
@@ -76,13 +79,12 @@ public class ProjetandroidActivity extends Activity {
 				startActivity(i);
 			}
 		});
-		
+
 		addDest.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(ProjetandroidActivity.this,
-						AddDest.class);
+				Intent i = new Intent(ProjetandroidActivity.this, AddDest.class);
 				startActivity(i);
 			}
 		});
@@ -92,7 +94,7 @@ public class ProjetandroidActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				ExportationXML test_exportation = new ExportationXML();
-			    test_exportation.exportation(t);
+				test_exportation.exportation(t);
 				ProjetandroidActivity.this.finish();
 			}
 		});
@@ -107,8 +109,11 @@ public class ProjetandroidActivity extends Activity {
 		 */
 	}
 
-	/* (non-Javadoc)
-	 * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onActivityResult(int, int,
+	 * android.content.Intent)
 	 */
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		if (requestCode == 0) {
@@ -141,42 +146,54 @@ public class ProjetandroidActivity extends Activity {
 					if (this.currentLivraison == null) {
 						this.currentLivraison = currentLivraison;
 					}
-					if (!currentLivraison.equals(this.currentLivraison)) {
+					if (this.currentLivraison.getStatuts() != 0) {
 						AlertDialog.Builder adb = new AlertDialog.Builder(this);
 						adb.setTitle("Erreur de scan");
-						adb.setMessage("Ce code barre n'appartient pas à la livraison en cours !");
+						adb.setMessage("Ce code barre appartient à une livraison déjà livré !");
 						adb.setPositiveButton("Fermer", null);
 						adb.show();
+						this.currentLivraison = null;
 					} else {
-						if (this.colisscane.contains(colisscan)) {
+						if (!currentLivraison.equals(this.currentLivraison)) {
 							AlertDialog.Builder adb = new AlertDialog.Builder(
 									this);
 							adb.setTitle("Erreur de scan");
-							adb.setMessage("Vous avez déjà scanné ce colis !");
+							adb.setMessage("Ce code barre n'appartient pas à la livraison en cours !");
 							adb.setPositiveButton("Fermer", null);
 							adb.show();
-
 						} else {
-							this.colisscane.add(colisscan);
-							if (currentLivraison.getNbr_colis() == this.colisscane
-									.size()) {
-								this.currentLivraison = null;
-								Intent i = new Intent(this,
-										DetailsDelivery.class);
-								i.putExtra("indexDelivery",
-										indexCurrentLivraison);
-								startActivity(i);
-
-							} else {
+							if (this.colisscane.contains(colisscan)) {
 								AlertDialog.Builder adb = new AlertDialog.Builder(
 										this);
-								int nbrecolis = currentLivraison.getNbr_colis()
-										- this.colisscane.size();
-								adb.setTitle("Scan validé");
-								adb.setMessage("Il reste " + nbrecolis
-										+ " colis à scanner !");
+								adb.setTitle("Erreur de scan");
+								adb.setMessage("Vous avez déjà scanné ce colis !");
 								adb.setPositiveButton("Fermer", null);
 								adb.show();
+
+							} else {
+								this.colisscane.add(colisscan);
+								if (currentLivraison.getNbr_colis() == this.colisscane
+										.size()) {
+									this.currentLivraison = null;
+									this.colisscane = new ArrayList<Colis>();
+									Intent i = new Intent(this,
+											DetailsDelivery.class);
+									i.putExtra("indexDelivery",
+											indexCurrentLivraison);
+									startActivity(i);
+
+								} else {
+									AlertDialog.Builder adb = new AlertDialog.Builder(
+											this);
+									int nbrecolis = currentLivraison
+											.getNbr_colis()
+											- this.colisscane.size();
+									adb.setTitle("Scan validé");
+									adb.setMessage("Il reste " + nbrecolis
+											+ " colis à scanner !");
+									adb.setPositiveButton("Fermer", null);
+									adb.show();
+								}
 							}
 						}
 					}
@@ -188,7 +205,9 @@ public class ProjetandroidActivity extends Activity {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Activity#onResume()
 	 */
 	@Override
@@ -219,59 +238,58 @@ public class ProjetandroidActivity extends Activity {
 		chargement.show();
 		new Thread() {
 			public void run() {
-				/*Destinataire d1 = new Destinataire("Mouquet Benoit",
-						"9, rue du beau soleil", "76660", "Londinières", "",
-						"0640191362", "0640191362");
-				d1.setCoordGPS(new CoordGPS(d1.getRue() + " " + d1.getCp()
-						+ " " + d1.getVille(), ProjetandroidActivity.this));
-				Livraison l1 = new Livraison("505465654", new Expediteur(
-						"Exia.cesi", "1 rue G Marconi", "76130",
-						"Mont Saint Aignan", "0235214256"), d1, 0, 0, "");
-				Destinataire d2 = new Destinataire("Beuvin Juliette",
-						"1, rue victor Boucher", "76270", "Neufchatel en Bray",
-						"", "0640191362", "0640191362");
-				d2.setCoordGPS(new CoordGPS(d2.getRue() + " " + d2.getCp()
-						+ " " + d2.getVille(), ProjetandroidActivity.this));
-				Livraison l2 = new Livraison("505465654", new Expediteur(
-						"Exia.cesi", "1 rue G Marconi", "76130",
-						"Mont Saint Aignan", "0235214256"), d2, 0, 0, "");
-				Destinataire d3 = new Destinataire("Ridel Nicolas",
-						"76 rue de l'église", "76190", "Auzebosc", "",
-						"0640191362", "0640191362");
-				d3.setCoordGPS(new CoordGPS(d3.getRue() + " " + d3.getCp()
-						+ " " + d3.getVille(), ProjetandroidActivity.this));
-				Livraison l3 = new Livraison("505465654", new Expediteur(
-						"Exia.cesi", "1 rue G Marconi", "76130",
-						"Mont Saint Aignan", "0235214256"), d3, 0, 0, "");
-				Destinataire d4 = new Destinataire("Pierre Ruggirello", "",
-						"76500", "Elbeuf", "", "0640191362", "0640191362");
-				d4.setCoordGPS(new CoordGPS(d4.getRue() + " " + d4.getCp()
-						+ " " + d4.getVille(), ProjetandroidActivity.this));
-				Livraison l4 = new Livraison("505465654", new Expediteur(
-						"Exia.cesi", "1 rue G Marconi", "76130",
-						"Mont Saint Aignan", "0235214256"), d4, 0, 0, "");
-				Expediteur e1 = new Expediteur("Guillaume Verna", "",
-						"75000", "Paris", "0640168542");
-				e1.setCoordGPS(new CoordGPS(e1.getRue() + " " + e1.getCp()
-						+ " " + e1.getVille(), ProjetandroidActivity.this));
-				Livraison l5 = new Livraison("505465654", e1, null, 0, 0, "");
-				ArrayList<Livraison> list = new ArrayList<Livraison>();
-				l1.setColis(new Colis("3595800105064", "30*30*30", "400g"));
-				// l1.setColis(new Colis("3103220009710", "30*30*30", "400g"));
-				l1.setNbr_colis(1);
-				list.add(l1);
-				list.add(l2);
-				list.add(l3);
-				list.add(l4);
-				list.add(l5);*/
-				//t = Tournee.getInstance();
+				/*
+				 * Destinataire d1 = new Destinataire("Mouquet Benoit",
+				 * "9, rue du beau soleil", "76660", "Londinières", "",
+				 * "0640191362", "0640191362"); d1.setCoordGPS(new
+				 * CoordGPS(d1.getRue() + " " + d1.getCp() + " " +
+				 * d1.getVille(), ProjetandroidActivity.this)); Livraison l1 =
+				 * new Livraison("505465654", new Expediteur( "Exia.cesi",
+				 * "1 rue G Marconi", "76130", "Mont Saint Aignan",
+				 * "0235214256"), d1, 0, 0, ""); Destinataire d2 = new
+				 * Destinataire("Beuvin Juliette", "1, rue victor Boucher",
+				 * "76270", "Neufchatel en Bray", "", "0640191362",
+				 * "0640191362"); d2.setCoordGPS(new CoordGPS(d2.getRue() + " "
+				 * + d2.getCp() + " " + d2.getVille(),
+				 * ProjetandroidActivity.this)); Livraison l2 = new
+				 * Livraison("505465654", new Expediteur( "Exia.cesi",
+				 * "1 rue G Marconi", "76130", "Mont Saint Aignan",
+				 * "0235214256"), d2, 0, 0, ""); Destinataire d3 = new
+				 * Destinataire("Ridel Nicolas", "76 rue de l'église", "76190",
+				 * "Auzebosc", "", "0640191362", "0640191362");
+				 * d3.setCoordGPS(new CoordGPS(d3.getRue() + " " + d3.getCp() +
+				 * " " + d3.getVille(), ProjetandroidActivity.this)); Livraison
+				 * l3 = new Livraison("505465654", new Expediteur( "Exia.cesi",
+				 * "1 rue G Marconi", "76130", "Mont Saint Aignan",
+				 * "0235214256"), d3, 0, 0, ""); Destinataire d4 = new
+				 * Destinataire("Pierre Ruggirello", "", "76500", "Elbeuf", "",
+				 * "0640191362", "0640191362"); d4.setCoordGPS(new
+				 * CoordGPS(d4.getRue() + " " + d4.getCp() + " " +
+				 * d4.getVille(), ProjetandroidActivity.this)); Livraison l4 =
+				 * new Livraison("505465654", new Expediteur( "Exia.cesi",
+				 * "1 rue G Marconi", "76130", "Mont Saint Aignan",
+				 * "0235214256"), d4, 0, 0, ""); Expediteur e1 = new
+				 * Expediteur("Guillaume Verna", "", "75000", "Paris",
+				 * "0640168542"); e1.setCoordGPS(new CoordGPS(e1.getRue() + " "
+				 * + e1.getCp() + " " + e1.getVille(),
+				 * ProjetandroidActivity.this)); Livraison l5 = new
+				 * Livraison("505465654", e1, null, 0, 0, "");
+				 * ArrayList<Livraison> list = new ArrayList<Livraison>();
+				 * l1.setColis(new Colis("3595800105064", "30*30*30", "400g"));
+				 * // l1.setColis(new Colis("3103220009710", "30*30*30",
+				 * "400g")); l1.setNbr_colis(1); list.add(l1); list.add(l2);
+				 * list.add(l3); list.add(l4); list.add(l5);
+				 */
+				// t = Tournee.getInstance();
 
-				//t.setListeLivraison(list);
-				
+				// t.setListeLivraison(list);
+
 				t = Tournee.getInstance();
-			    Metier_tournee mt= new Metier_tournee();
-			    mt.mai_ajout_livraison(ProjetandroidActivity.this);
-				
+				if (t.getlivreur() == null) {
+					Metier_tournee mt = new Metier_tournee();
+					mt.mai_ajout_livraison(ProjetandroidActivity.this);
+				}
+
 				AntExecution ae = new AntExecution(t.getListeLivraison());
 
 				t.setListeLivraison(ae.run());

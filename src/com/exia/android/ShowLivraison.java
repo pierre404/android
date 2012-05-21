@@ -23,7 +23,7 @@ public class ShowLivraison extends Activity {
 
 	private TextView detailsDest;
 	private TextView detailsExp;
-	// private TextView nbrColis;
+	private TextView nbrColis;
 	private Button navigation;
 	private Button collect;
 	private Livraison currentLivraison = null;
@@ -66,16 +66,19 @@ public class ShowLivraison extends Activity {
 					+ currentLivraison.getDestinataire().getTelephone() + "\n"
 					+ "Portable : "
 					+ currentLivraison.getDestinataire().getPortable() + "\n");
-			collect.setVisibility(0);
+			collect.setVisibility(View.INVISIBLE);
 		} else {
-			collect.setOnClickListener(new OnClickListener() {
+			if (currentLivraison.getStatuts() == 0)
+				collect.setOnClickListener(new OnClickListener() {
 
-				@Override
-				public void onClick(View arg0) {
-					currentLivraison.setStatus(Status.COLLECT);
-					finish();
-				}
-			});
+					@Override
+					public void onClick(View arg0) {
+						currentLivraison.setStatus(Status.COLLECT);
+						finish();
+					}
+				});
+			else
+				collect.setVisibility(View.INVISIBLE);
 		}
 
 		// Affichage des informations de l'expéditeur
@@ -88,7 +91,9 @@ public class ShowLivraison extends Activity {
 				+ currentLivraison.getExpediteur().getVille() + "\n"
 				+ "Téléphone : "
 				+ currentLivraison.getExpediteur().getTelephone() + "\n");
-		// nbrColis.setText(currentLivraison.getNbr_colis());
+		
+		nbrColis = (TextView) findViewById(R.id.nbr_colis);
+		nbrColis.setText(currentLivraison.getNbr_colis() + "");
 
 		// On affecte l'action au bouton pour lancer la navigation
 		navigation = (Button) findViewById(R.id.launch_navigation);

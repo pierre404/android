@@ -8,13 +8,25 @@ import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 
+/**
+ * 
+ * Classe contenant les coordonnées GPS
+ * 
+ * @author Benoit
+ * 
+ */
 public class CoordGPS {
 	double latitude;
 	double longitude;
 
+	/**
+	 * @param address
+	 *            L'adresse de la personne
+	 * @param context
+	 *            Le context de l'activité
+	 */
 	public CoordGPS(String address, Context context) {
-		Geocoder gc = new Geocoder(context,
-				Locale.FRANCE);
+		Geocoder gc = new Geocoder(context, Locale.FRANCE);
 		List<Address> addresses;
 		try {
 			addresses = gc.getFromLocationName(address, 5);
@@ -28,9 +40,14 @@ public class CoordGPS {
 			e.printStackTrace();
 		}
 	}
-	
-	public CoordGPS(Double latitude, Double longitude)
-	{
+
+	/**
+	 * @param latitude
+	 *            La latitude
+	 * @param longitude
+	 *            La longitude
+	 */
+	public CoordGPS(Double latitude, Double longitude) {
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}

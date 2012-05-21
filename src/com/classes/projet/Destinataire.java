@@ -1,8 +1,30 @@
 package com.classes.projet;
 
+/**
+ * Classe matérialisant un destinataire
+ * 
+ * @author Benoit
+ * 
+ */
 public class Destinataire {
 
 	/* Constructeur */
+	/**
+	 * @param nom
+	 *            Le nom
+	 * @param rue
+	 *            La rue
+	 * @param cp
+	 *            Le code postale
+	 * @param ville
+	 *            La ville
+	 * @param complement_adresse
+	 *            Le complément d'adresse
+	 * @param telephone
+	 *            Le téléphone
+	 * @param portable
+	 *            Le portable
+	 */
 	public Destinataire(String nom, String rue, String cp, String ville,
 			String complement_adresse, String telephone, String portable) {
 		super();
