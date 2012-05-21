@@ -18,6 +18,7 @@
 
     <TextView
         android:id="@+id/textView2"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/exp"
@@ -32,6 +33,7 @@
 
     <TextView
         android:id="@+id/textView3"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dest"
@@ -45,6 +47,7 @@
         android:textColor="#6d6d6d" />
 
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -67,6 +70,7 @@
         android:id="@+id/launch_navigation"
         android:layout_width="185dp"
         android:layout_height="45dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:background="@drawable/btn_nav" />
 
@@ -74,6 +78,7 @@
         android:id="@+id/collect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="@string/collect" />
 
 </LinearLayout>
