@@ -40,7 +40,7 @@ public class ExportationXML {
 	 */
 	public void creation_fichier_XML(String nom_fichier) {
 
-		String ENCODING = "ISO-8859-1";
+		String ENCODING = "UTF-8";
 		String en_tete = "<?xml version=\"1.0\" encoding=\"" + ENCODING
 				+ "\"?>\n";
 

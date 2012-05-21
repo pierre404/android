@@ -7,7 +7,8 @@
     android:paddingBottom="40dp"
     android:paddingLeft="27dp"
     android:paddingRight="28dp"
-    android:paddingTop="90dp" >
+    android:paddingTop="90dp" 
+    android:scrollbars="vertical">
 
     <TextView
         android:id="@+id/textView1"

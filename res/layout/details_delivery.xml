@@ -25,7 +25,8 @@
         android:layout_weight="1"
         android:layout_marginLeft="5dp"
         android:text="@string/comments"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#222222" />
 
     <EditText
         android:id="@+id/comments"
@@ -33,7 +34,8 @@
         android:layout_height="0dp"
         android:layout_weight="5"
         android:ems="10"
-        android:inputType="textMultiLine" >
+        android:inputType="textMultiLine"
+        android:textColor="#6d6d6d" >
 
         <requestFocus />
     </EditText>
