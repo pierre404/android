@@ -74,6 +74,7 @@ public class ShowLivraison extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						currentLivraison.setStatus(Status.COLLECT);
+						setResult(1);
 						finish();
 					}
 				});

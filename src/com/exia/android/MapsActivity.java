@@ -3,6 +3,11 @@ package com.exia.android;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -76,6 +81,10 @@ public class MapsActivity extends MapActivity {
 				R.drawable.marker3);
 		Drawable drawableYellow = this.getResources().getDrawable(
 				R.drawable.marker4);
+		Drawable drawablePurple = this.getResources().getDrawable(
+				R.drawable.marker5);
+		Drawable drawableGrey = this.getResources().getDrawable(
+				R.drawable.marker6);
 		CustomItemizedOverlay itemizedoverlay = new CustomItemizedOverlay(
 				drawableBlue, this);
 
@@ -88,6 +97,12 @@ public class MapsActivity extends MapActivity {
 		drawableYellow.setBounds(0 - drawableYellow.getIntrinsicWidth() / 2,
 				0 - drawableYellow.getIntrinsicHeight(),
 				drawableYellow.getIntrinsicWidth() / 2, 0);
+		drawablePurple.setBounds(0 - drawablePurple.getIntrinsicWidth() / 2,
+				0 - drawablePurple.getIntrinsicHeight(),
+				drawablePurple.getIntrinsicWidth() / 2, 0);
+		drawableGrey.setBounds(0 - drawableGrey.getIntrinsicWidth() / 2,
+				0 - drawableGrey.getIntrinsicHeight(),
+				drawableGrey.getIntrinsicWidth() / 2, 0);
 
 		int latitude;
 		int longitude;
@@ -117,14 +132,46 @@ public class MapsActivity extends MapActivity {
 			// On modifie le marqueur pas défaut dans le cas d'une récupération
 			// de colis, ou de livraisons déjà effectuées
 			if (livraisons.get(i).getStatuts() == 4) {
-				overlayitem.setMarker(drawableYellow);
+				overlayitem.setMarker(addTextToMaker(drawableYellow,
+						overlayitem.getTitle()));
 			} else if (livraisons.get(i).getStatuts() > 0) {
-				overlayitem.setMarker(drawableRed);
+
+				overlayitem.setMarker(addTextToMaker(drawableRed,
+						overlayitem.getTitle()));
 			} else if (livraisons.get(i).getDestinataire() == null) {
 
-				overlayitem.setMarker(drawableGreen);
+				overlayitem.setMarker(addTextToMaker(drawableGreen,
+						overlayitem.getTitle()));
+			} else {
+
+				overlayitem.setMarker(addTextToMaker(drawableBlue,
+						overlayitem.getTitle()));
 			}
 		}
+
+		GeoPoint point = new GeoPoint(
+				(int) (Utils.getLocationGPS(this)[0] * 1000000),
+				(int) (Utils.getLocationGPS(this)[1] * 1000000));
+
+		OverlayItem overlayitem = new OverlayItem(point, "C", "");
+
+		overlayitem.setMarker(addTextToMaker(drawablePurple,
+				overlayitem.getTitle()));
+
+		itemizedoverlay.addOverlay(overlayitem);
+
+		double latRepository = 49.49634;
+		double lonRepository = 0.10849;
+
+		point = new GeoPoint((int) (latRepository * 1000000),
+				(int) (lonRepository * 1000000));
+
+		overlayitem = new OverlayItem(point, "D", "");
+
+		overlayitem.setMarker(addTextToMaker(drawableGrey,
+				overlayitem.getTitle()));
+
+		itemizedoverlay.addOverlay(overlayitem);
 
 		mapOverlays.add(itemizedoverlay);
 		MapController controller = mv.getController();
@@ -141,6 +188,22 @@ public class MapsActivity extends MapActivity {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see android.app.Activity#onActivityResult(int, int,
+	 * android.content.Intent)
+	 */
+	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		if (requestCode == 1) {
+			if (resultCode == 1) {
+				drawAddressesToLocation(Tournee.getInstance()
+						.getListeLivraison());
+				mv.invalidate();
+			}
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Activity#onBackPressed()
 	 */
 	@Override
@@ -148,6 +211,32 @@ public class MapsActivity extends MapActivity {
 		// TODO Auto-generated method stub
 		super.onBackPressed();
 		finish();
+	}
+
+	/**
+	 * 
+	 * Permet d'ajouter le text au marquer
+	 * 
+	 * @param d
+	 *            L'image de base du marqueur
+	 * @param text
+	 *            Le text à afficher
+	 * @return Le nouveau marqueur
+	 */
+	public Drawable addTextToMaker(Drawable d, String text) {
+		Bitmap bitmap = ((BitmapDrawable) d).getBitmap().copy(
+				Bitmap.Config.ARGB_8888, true);
+		Canvas c = new Canvas(bitmap);
+		Paint paint = new Paint();
+		paint.setTextAlign(Paint.Align.CENTER);
+		paint.setTextSize(50);
+		paint.setARGB(255, 255, 255, 255);
+		c.drawText(text, bitmap.getWidth() / 2, 62, paint);
+		Drawable ledrawable = new BitmapDrawable(getResources(), bitmap);
+		ledrawable.setBounds(0 - ledrawable.getIntrinsicWidth() / 2,
+				0 - ledrawable.getIntrinsicHeight(),
+				ledrawable.getIntrinsicWidth() / 2, 0);
+		return ledrawable;
 	}
 
 }

@@ -4,15 +4,12 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 
 import com.exia.android.MapsActivity;
 import com.exia.android.ShowLivraison;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
-import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
 
 public class CustomItemizedOverlay extends ItemizedOverlay<OverlayItem> {
@@ -41,9 +38,12 @@ public class CustomItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 
 	@Override
 	protected boolean onTap(int index) {
-		Intent i = new Intent(context, ShowLivraison.class);
-		i.putExtra("indexDelivery", index);
-		context.startActivity(i);
+		if(index < mapOverlays.size() - 2)
+		{
+			Intent i = new Intent(context, ShowLivraison.class);
+			i.putExtra("indexDelivery", index);
+			context.startActivityForResult(i, 1);
+		}
 		return true;
 	}
 
@@ -77,7 +77,7 @@ public class CustomItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 				(maxLongitude + minLongitude) / 2);
 	}
 
-	@Override
+	/*@Override
 	public void draw(android.graphics.Canvas canvas, MapView mapView,
 			boolean shadow) {
 		super.draw(canvas, mapView, shadow);
@@ -105,6 +105,6 @@ public class CustomItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 						ptScreenCoord.y - 62, paint);
 			}
 		}
-	}
+	}*/
 
 }

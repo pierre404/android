@@ -10,8 +10,8 @@ public class AntExecution {
 	private ArrayList<Livraison> livraisons;
 	private int distances[][];
 
-	private double latRepository = 49.477029;
-	private double lonRepository = 1.091308;
+	private double latRepository = 49.49634;
+	private double lonRepository = 0.10849;
 	
 	private boolean needReturn = true;
 
