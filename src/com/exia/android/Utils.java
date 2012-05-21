@@ -37,8 +37,11 @@ public class Utils {
 		{
 			location = lm
 					.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-			coord[0] = location.getLatitude();
-			coord[1] = location.getLongitude();
+			if(location != null)
+			{
+				coord[0] = location.getLatitude();
+				coord[1] = location.getLongitude();
+			}
 		}
 		return coord;
 	}
