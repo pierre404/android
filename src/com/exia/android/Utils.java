@@ -33,6 +33,13 @@ public class Utils {
 			coord[0] = location.getLatitude();
 			coord[1] = location.getLongitude();
 		}
+		else
+		{
+			location = lm
+					.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+			coord[0] = location.getLatitude();
+			coord[1] = location.getLongitude();
+		}
 		return coord;
 	}
 

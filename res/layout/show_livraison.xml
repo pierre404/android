@@ -7,22 +7,28 @@
     android:paddingBottom="40dp"
     android:paddingLeft="27dp"
     android:paddingRight="28dp"
-    android:paddingTop="85dp" >
+    android:paddingTop="90dp" >
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
         android:text="@string/info_delivery"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#94C11F"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:text="@string/exp"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#222222" />
 
     <TextView
         android:id="@+id/details_exp"
@@ -33,11 +39,14 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:text="@string/dest"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#222222" />
 
     <TextView
         android:id="@+id/details_dest"
@@ -47,31 +56,31 @@
         android:textColor="#6d6d6d" />
 
     <LinearLayout
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" >
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:text="@string/number_parcel"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textColor="#222222" />
 
         <TextView
             android:id="@+id/nbr_colis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#6d6d6d" />
-
     </LinearLayout>
 
     <Button
         android:id="@+id/launch_navigation"
         android:layout_width="185dp"
         android:layout_height="45dp"
-        android:layout_marginTop="20dp"
         android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:background="@drawable/btn_nav" />
 
     <Button

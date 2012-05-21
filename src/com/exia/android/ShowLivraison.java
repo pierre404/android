@@ -95,7 +95,7 @@ public class ShowLivraison extends Activity {
 				+ currentLivraison.getExpediteur().getTelephone() + "\n");
 
 		nbrColis = (TextView) findViewById(R.id.nbr_colis);
-		nbrColis.setText(currentLivraison.getNbr_colis() + "");
+		nbrColis.setText(" " + currentLivraison.getNbr_colis());
 
 		// On affecte l'action au bouton pour lancer la navigation
 		navigation = (Button) findViewById(R.id.launch_navigation);
